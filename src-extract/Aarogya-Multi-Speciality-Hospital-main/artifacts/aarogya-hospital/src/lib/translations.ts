@@ -151,6 +151,10 @@ const en = {
         items: [
           { name: 'Heart diseases', detail: 'Out-patient consultation and treatment.' },
           { name: 'ECG', detail: 'Heart tracing done at the hospital.' },
+          { name: 'TMT (treadmill test)', detail: 'Stress test that checks the heart while you walk on a treadmill.' },
+          { name: '2D Echo', detail: 'Ultrasound scan of the heart’s chambers, valves and pumping.' },
+          { name: 'Trop T test', detail: 'Blood test that helps detect damage to the heart muscle.' },
+          { name: 'Lab tests', detail: 'Blood and other routine tests done at the hospital.' },
           { name: 'Blood pressure and thyroid', detail: 'Consultation, treatment and follow-up.' },
         ],
       },
@@ -399,6 +403,10 @@ const te: Dictionary = {
         items: [
           { name: 'గుండె సంబంధిత వ్యాధులు', detail: 'ఓ.పి. సంప్రదింపు మరియు చికిత్స.' },
           { name: 'ఈసీజీ', detail: 'హాస్పిటల్‌లోనే గుండె పరీక్ష.' },
+          { name: 'టీఎంటీ (ట్రెడ్‌మిల్ పరీక్ష)', detail: 'ట్రెడ్‌మిల్‌పై నడుస్తున్నప్పుడు గుండె పనితీరును చూసే పరీక్ష.' },
+          { name: '2డి ఎకో', detail: 'గుండె గదులు, కవాటాలు మరియు పంపింగ్‌ను చూసే అల్ట్రాసౌండ్ స్కాన్.' },
+          { name: 'ట్రోప్ టి పరీక్ష', detail: 'గుండె కండరానికి నష్టాన్ని గుర్తించడానికి సహాయపడే రక్త పరీక్ష.' },
+          { name: 'ల్యాబ్ పరీక్షలు', detail: 'హాస్పిటల్‌లోనే రక్త మరియు ఇతర సాధారణ పరీక్షలు.' },
           { name: 'బీపీ మరియు థైరాయిడ్', detail: 'సంప్రదింపు, చికిత్స మరియు ఫాలో-అప్.' },
         ],
       },

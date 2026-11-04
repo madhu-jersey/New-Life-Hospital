@@ -1,5 +1,5 @@
 import { type CSSProperties, useCallback, useEffect, useRef, useState } from 'react';
-import { Activity, Baby, Clock3, Flower2, Gauge, HandHeart, HeartHandshake, HeartPulse, Plus, ShieldCheck, BadgeCheck, Rotate3d, Sprout, SquarePen, Stethoscope, UserRound } from 'lucide-react';
+import { Activity, Baby, Clock3, Flower2, FlaskConical, Footprints, Gauge, HandHeart, HeartHandshake, HeartPulse, Plus, TestTube, Waves, ShieldCheck, BadgeCheck, Rotate3d, Sprout, SquarePen, Stethoscope, UserRound } from 'lucide-react';
 import { ALT_PHONE, ALT_TEL, DIRECTIONS, EMAIL, Icon, LANDLINE, LANDLINE_TEL, MAILTO, magnetic, PHONE, TEL } from './common';
 import { DOCTORS, HOSPITAL_INFO, HOSPITAL_MAP_EMBED, HOSPITAL_TOURS, type TourKey } from '@/lib/hospital';
 import { useLanguage } from '@/lib/i18n';
@@ -18,7 +18,7 @@ export function SectionHead({ title, subline, tone = '' }: { title: string; subl
 }
 
 const ACCENT_ICON = { heart: HeartPulse, women: Sprout };
-const CARE_ITEM_ICONS = { heart: [HeartPulse, Activity, Gauge], women: [Baby, Flower2, HeartHandshake] };
+const CARE_ITEM_ICONS = { heart: [HeartPulse, Activity, Footprints, Waves, TestTube, FlaskConical, Gauge], women: [Baby, Flower2, HeartHandshake] };
 
 // Line art behind each care panel: a heartbeat for heart care, unfurling leaves for women's care.
 // Drawn once when the panel scrolls into view.
