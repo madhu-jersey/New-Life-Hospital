@@ -634,6 +634,16 @@ main, footer, .nav { transition: opacity .18s ease; }
   .gallery-tile:hover > picture img, .doctor:hover .doctor-mark-icon { transform: none; }
 }
 
+/* ---------- Touch screens: keep scrolling at full frame rate ----------
+   Phones redraw a backdrop blur behind fixed bars on every scrolled frame, and animating a blur filter is
+   costly on mobile GPUs. Solid bars and blur-free title reveals look nearly the same and scroll smoothly. */
+@media (hover: none) and (pointer: coarse) {
+  .header.is-scrolled { background: rgba(245, 247, 241, .97); backdrop-filter: none; -webkit-backdrop-filter: none; }
+  .mobile-dock { background: rgb(15, 58, 36); backdrop-filter: none; -webkit-backdrop-filter: none; }
+  .reveal-title { transition: opacity 1s var(--ease), transform 1.1s var(--ease); }
+  .has-reveal-observer .reveal-title:not([data-revealed]) { filter: none; }
+}
+
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-delay: 0s !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; transition-delay: 0s !important; }

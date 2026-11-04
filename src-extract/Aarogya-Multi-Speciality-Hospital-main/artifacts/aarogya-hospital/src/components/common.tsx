@@ -173,10 +173,18 @@ export function MobileDock() {
   const { t } = useLanguage();
   const [visible, setVisible] = useState(false);
   useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > window.innerHeight * 0.55);
+    // Checked at most once per frame so a fast flick doesn't queue work on every scroll event.
+    let frame = 0;
+    const onScroll = () => {
+      if (frame) return;
+      frame = requestAnimationFrame(() => {
+        frame = 0;
+        setVisible(window.scrollY > window.innerHeight * 0.55);
+      });
+    };
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
-    return () => window.removeEventListener('scroll', onScroll);
+    return () => { window.removeEventListener('scroll', onScroll); cancelAnimationFrame(frame); };
   }, []);
   return (
     <nav className={`mobile-dock${visible ? ' is-visible' : ''}`} aria-label={t.dock.aria}>
