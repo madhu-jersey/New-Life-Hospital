@@ -6,9 +6,19 @@ export type GalleryPhoto = { src: string; srcSet?: string; width: number; height
 // The first four fill the main grid; the rest sit behind "View more photos". Their real size is learned when they load.
 // Files named demo-*.svg are "Photo coming soon" placeholders and only show while DEMO_CONTENT is on.
 const photoUrls = import.meta.glob<string>('../assets/gallery-more/*.{jpg,jpeg,png,webp,avif,svg,JPG,JPEG,PNG,WEBP}', { eager: true, query: '?url', import: 'default' });
+// Smaller copies (480 and 960 px wide) live in src/assets/gallery-sizes/ as <name>-480.webp and <name>-960.webp,
+// so phones download a small file for each tile and the full photo only when it is opened.
+const sizedUrls = import.meta.glob<string>('../assets/gallery-sizes/*.webp', { eager: true, query: '?url', import: 'default' });
+const sized = (file: string, width: number) => sizedUrls[file.replace('/gallery-more/', '/gallery-sizes/').replace(/\.[^.]+$/, `-${width}.webp`)];
+const srcSetFor = (file: string) => {
+  const small = sized(file, 480);
+  const medium = sized(file, 960);
+  if (!small && !medium) return undefined;
+  return [small && `${small} 480w`, medium && `${medium} 960w`, `${photoUrls[file]} 1440w`].filter(Boolean).join(', ');
+};
 export const GALLERY_PHOTOS: GalleryPhoto[] = Object.keys(photoUrls)
   .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
-  .map((file) => ({ src: photoUrls[file], width: 1200, height: 900, demo: /\/demo-[^/]*$/.test(file) }))
+  .map((file) => ({ src: photoUrls[file], srcSet: srcSetFor(file), width: 1200, height: 900, demo: /\/demo-[^/]*$/.test(file) }))
   .filter((photo) => DEMO_CONTENT || !photo.demo);
 
 // Real reviews win; the labelled samples fill in only while DEMO_CONTENT is on.

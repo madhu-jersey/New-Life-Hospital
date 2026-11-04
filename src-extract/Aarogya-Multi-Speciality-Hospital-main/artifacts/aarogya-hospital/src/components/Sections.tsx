@@ -5,7 +5,7 @@ import { DOCTORS, HOSPITAL_INFO, HOSPITAL_MAP_EMBED, HOSPITAL_TOURS, type TourKe
 import { useLanguage } from '@/lib/i18n';
 import { GALLERY_PHOTOS, type GalleryPhoto, REVIEW_DATA } from '@/lib/sections';
 import { lockScroll } from '@/lib/smooth-scroll';
-import { doctorPhoto } from '@/lib/doctor-photos';
+import { doctorPhoto, doctorPhotoSized } from '@/lib/doctor-photos';
 import { useLiveReviews } from '@/lib/live-reviews';
 
 export function SectionHead({ title, subline, tone = '' }: { title: string; subline?: string; tone?: string }) {
@@ -35,7 +35,7 @@ export function Doctors() {
               <article className={`doctor doctor--${doctor.accent}${photo ? ' has-photo' : ''} reveal`} key={doctor.initials}>
                 {photo ? (
                   <div className="doctor-portrait">
-                    <img src={photo} alt={`${text.name}, ${text.department}, ${HOSPITAL_INFO.name}`} loading="lazy" decoding="async" />
+                    <img src={doctorPhotoSized(doctor.photoKey, 640)} srcSet={`${doctorPhotoSized(doctor.photoKey, 640)} 640w, ${photo} 1305w`} sizes="(max-width: 767px) 100vw, 540px" alt={`${text.name}, ${text.department}, ${HOSPITAL_INFO.name}`} loading="lazy" decoding="async" />
                     <AccentIcon className="doctor-portrait-badge" aria-hidden="true" />
                   </div>
                 ) : (
@@ -90,7 +90,7 @@ export function Facilities() {
                 {doctor && doctorText && (
                   <a className="care-doctor" href="#doctors">
                     {photo
-                      ? <img className="care-avatar" src={photo} alt="" loading="lazy" decoding="async" />
+                      ? <img className="care-avatar" src={doctor ? doctorPhotoSized(doctor.photoKey, 160) : photo} alt="" loading="lazy" decoding="async" />
                       : <span className="care-avatar care-avatar--empty" aria-hidden="true"><GroupIcon /></span>}
                     <span className="care-doctor-text">
                       <strong>{doctorText.name}</strong>

@@ -101,7 +101,7 @@ export const HOSPITAL_MAP_EMBED = `https://maps.google.com/maps?cid=${GOOGLE_LIS
 export type TourKey = 'outside' | 'inside';
 export const HOSPITAL_TOURS: { key: TourKey; src: string }[] = [
   { key: 'outside', src: 'https://www.google.com/maps/embed?pb=!4v1793787607326!6m8!1m7!1sZCbx_tyZya4f4wAkPl0gig!2m2!1d16.75662207880169!2d81.68282964291566!3f287.9206311788489!4f1.8878840544173983!5f0.7820865974627469' },
-  { key: 'inside', src: 'https://www.google.com/maps/embed?pb=!4v1793787273456!6m8!1m7!1sCAoSF0NJSE0wb2dLRUlDQWdJRDJ2dWVtMVFF!2m2!1d16.75705279535072!2d81.68285320384368!3f201.69248887371987!4f-12.381390240572017!5f0.7820865974627469' },
+  { key: 'inside', src: 'https://www.google.com/maps/embed?pb=!4v1793806862611!6m8!1m7!1sCAoSF0NJSE0wb2dLRUlDQWdJRDJ2dWZxclFF!2m2!1d16.75705279535072!2d81.68285320384368!3f218.6529853943955!4f2.4202360794776467!5f0.7820865974627469' },
 ];
 export const GOOGLE_REVIEWS = HOSPITAL_INFO.googleReviewsUrl;
 

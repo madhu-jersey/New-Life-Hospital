@@ -7,3 +7,4 @@ Every image in this folder appears in the hospital gallery. The first four fill 
 - `demo-*.svg` files are "Photo coming soon" placeholders. They show only while `DEMO_CONTENT` is `true` in `src/lib/hospital.ts`; delete them once real photos are in.
 - The Gallery section is hidden while this folder has no photos.
 - Use only real photos of this hospital, and keep each one small (about 1600 px wide, WebP or JPEG under 300 KB).
+- Phones load smaller copies from `src/assets/gallery-sizes/` (`<name>-480.webp` and `<name>-960.webp`). A photo without them still works; it just downloads the full file.
