@@ -20,8 +20,8 @@ export default function NotFound() {
             {t.notFound.message}
           </p>
           <div className="mt-6 flex flex-col gap-3 text-sm">
-            <a className="font-semibold text-pink-800 underline" href="/">{t.notFound.home}</a>
-            <a className="font-semibold text-pink-800 underline" href={TEL}>{t.notFound.call(PHONE)}</a>
+            <a className="font-semibold text-green-900 underline" href="/">{t.notFound.home}</a>
+            <a className="font-semibold text-green-900 underline" href={TEL}>{t.notFound.call(PHONE)}</a>
           </div>
         </CardContent>
       </Card>

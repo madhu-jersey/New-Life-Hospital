@@ -145,7 +145,7 @@ export function updateSearchMetadata(pathname: string, configuredSiteUrl?: strin
   setMeta('meta[name="description"]', 'name', 'description', HOSPITAL_INFO.description);
   const robotsContent = HOSPITAL_INFO.noindex || isLocal ? 'noindex, nofollow' : isHome ? 'index, follow, max-image-preview:large, max-snippet:-1' : 'noindex, nofollow';
   setMeta('meta[name="robots"]', 'name', 'robots', robotsContent);
-  setMeta('meta[name="theme-color"]', 'name', 'theme-color', '#A8195F');
+  setMeta('meta[name="theme-color"]', 'name', 'theme-color', '#0F3A24');
   setMeta('meta[property="og:title"]', 'property', 'og:title', HOSPITAL_INFO.title);
   setMeta('meta[property="og:description"]', 'property', 'og:description', HOSPITAL_INFO.description);
   setMeta('meta[property="og:type"]', 'property', 'og:type', 'website');
