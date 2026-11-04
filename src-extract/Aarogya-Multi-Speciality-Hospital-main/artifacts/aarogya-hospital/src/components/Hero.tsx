@@ -76,9 +76,17 @@ export function Hero() {
       <nav className="band" aria-label={t.nav.services}>
         <div className="container band-inner">
           <a className="band-label" href="#services">{t.nav.services}</a>
-          <ul className="band-list">
-            {t.band.map((item) => <li key={item}><a href="#services">{item}</a></li>)}
-          </ul>
+          {/* Two copies of the list side by side scroll as one endless row; the second copy is hidden from
+              screen readers and the keyboard. Hovering, focusing or touching the row pauses it. */}
+          <div className="band-viewport">
+            <div className="band-track">
+              {[0, 1].map((copy) => (
+                <ul className="band-list" key={copy} aria-hidden={copy === 1 || undefined}>
+                  {t.band.map((item) => <li key={item}><a href="#services" tabIndex={copy === 1 ? -1 : undefined}>{item}</a></li>)}
+                </ul>
+              ))}
+            </div>
+          </div>
         </div>
       </nav>
     </>
