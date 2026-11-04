@@ -47,6 +47,7 @@ export function Doctors() {
                   <p className="doctor-dept">{text.department}</p>
                   <h3 className="doctor-name">{text.name}</h3>
                   <p className="doctor-degree" lang="en">{doctor.degree}</p>
+                  <p className="doctor-reg">{t.doctors.regNo} <span lang="en">{doctor.regNo}</span></p>
                   <p className="doctor-role">{text.role}</p>
                   <ul className="doctor-points">
                     {text.points.map((point) => <li key={point}><Icon name="check" />{point}</li>)}

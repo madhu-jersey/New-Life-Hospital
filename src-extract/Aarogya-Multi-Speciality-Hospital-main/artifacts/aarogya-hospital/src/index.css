@@ -201,6 +201,7 @@ main, footer, .nav { transition: opacity .18s ease; }
 .doctor-name { margin-top: 6px; font-family: var(--serif); font-weight: 600; font-size: clamp(26px, 2.5vw, 32px); line-height: 1.15; letter-spacing: -.02em; }
 .lang-te .doctor-name { font-family: var(--telugu-display); line-height: 1.3; }
 .doctor-degree { margin-top: 12px; color: var(--ink); font-size: 15px; font-weight: 600; line-height: 1.45; }
+.doctor-reg { margin-top: 2px; color: var(--muted); font-size: 14px; font-variant-numeric: tabular-nums; }
 .doctor-role { margin-top: 4px; color: var(--muted); font-size: 15px; }
 .doctor-points { display: grid; gap: 6px; margin-top: 16px; }
 .doctor-points li { display: flex; gap: 10px; align-items: flex-start; font-size: 16px; }
