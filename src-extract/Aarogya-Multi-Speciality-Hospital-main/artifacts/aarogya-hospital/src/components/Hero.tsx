@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'react';
-import { Icon, magnetic, PHONE, TEL } from './common';
+import { Icon, PHONE, TEL } from './common';
 import { DOCTORS, HOSPITAL_INFO } from '@/lib/hospital';
 import { useLanguage } from '@/lib/i18n';
 import { doctorStatus, useClinicClock } from '@/lib/schedule';
@@ -65,29 +65,22 @@ export function Hero() {
             <p className="hero-other telugu-display" lang="te">{HOSPITAL_INFO.teluguName}</p>
             <p className="hero-lead">{t.hero.lead}</p>
             <div className="hero-actions">
-              <a className="button" href={TEL} {...magnetic}><Icon name="phone" /><span>{t.hero.callNow}</span></a>
-              <a className="button button-ghost" href="#booking" {...magnetic}><Icon name="whatsapp" /><span>{t.hero.book}</span></a>
+              <a className="button" href={TEL}><Icon name="phone" /><span>{t.hero.callNow}</span></a>
+              <a className="button button-ghost" href="#booking"><Icon name="whatsapp" /><span>{t.hero.book}</span></a>
             </div>
             <p className="hero-note">{t.hero.note} <a href={TEL}>{PHONE}</a></p>
           </div>
           <TodayBoard />
         </div>
-        <svg className="hero-ecg" viewBox="0 0 1440 140" preserveAspectRatio="none" aria-hidden="true">
-          <path
-            pathLength="1"
-            d="M0 92 H520 l16 0 l10 -16 l10 16 l18 0 l12 -64 l14 108 l12 -60 l16 0 l14 -20 l18 20 H840 l14 0 l8 -10 l8 10 l12 0 l10 -42 l12 70 l10 -38 l14 0 l12 -14 l14 14 H1440"
-          />
-        </svg>
       </section>
-      <div className="band" aria-label={t.nav.services}>
-        <div className="band-track">
-          {[0, 1].map((copy) => (
-            <ul className="band-list" key={copy} aria-hidden={copy === 1}>
-              {t.band.map((item) => <li key={item}>{item}</li>)}
-            </ul>
-          ))}
+      <nav className="band" aria-label={t.nav.services}>
+        <div className="container band-inner">
+          <a className="band-label" href="#services">{t.nav.services}</a>
+          <ul className="band-list">
+            {t.band.map((item) => <li key={item}><a href="#services">{item}</a></li>)}
+          </ul>
         </div>
-      </div>
+      </nav>
     </>
   );
 }

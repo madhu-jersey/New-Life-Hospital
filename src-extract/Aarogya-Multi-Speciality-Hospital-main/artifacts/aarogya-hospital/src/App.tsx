@@ -62,7 +62,6 @@ function App() {
           const target = entry.target as HTMLElement;
           const index = batchIndex.get(target.parentElement) ?? 0;
           batchIndex.set(target.parentElement, index + 1);
-          target.style.setProperty('--reveal-delay', `${Math.min(index * 90, 540)}ms`);
           // An attribute, not a class: React rewrites className on re-render (an FAQ toggle, a map tap) and would wipe it.
           target.setAttribute('data-revealed', '');
           observer.unobserve(target);
@@ -96,7 +95,6 @@ function App() {
             <Switch>
               <Route path="/">
                 <>
-                  <div className="top-progress" aria-hidden="true" />
                   <Header />
                   <main>
                     <Hero />

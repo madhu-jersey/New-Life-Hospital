@@ -32,7 +32,7 @@ const en = {
     why: 'Why us',
     insurance: 'Insurance',
     doctors: 'Doctors',
-    services: 'Facilities',
+    services: 'Services',
     booking: 'Book',
     gallery: 'Gallery',
     reviews: 'Reviews',
@@ -130,7 +130,7 @@ const en = {
     } as Record<string, DoctorText>,
   },
   facilities: {
-    title: 'Facilities',
+    title: 'Services',
     subline: 'Treatments and tests available at the hospital.',
     meetDoctor: 'Meet the doctor',
     groups: [
@@ -284,7 +284,7 @@ const te: Dictionary = {
     why: 'ఎందుకు మేము',
     insurance: 'ఇన్సూరెన్స్',
     doctors: 'డాక్టర్లు',
-    services: 'సదుపాయాలు',
+    services: 'సేవలు',
     booking: 'బుకింగ్',
     gallery: 'గ్యాలరీ',
     reviews: 'సమీక్షలు',
@@ -382,7 +382,7 @@ const te: Dictionary = {
     },
   },
   facilities: {
-    title: 'సదుపాయములు',
+    title: 'సేవలు',
     subline: 'హాస్పిటల్‌లో అందుబాటులో ఉన్న చికిత్సలు మరియు పరీక్షలు.',
     meetDoctor: 'డాక్టర్‌ను కలవండి',
     groups: [

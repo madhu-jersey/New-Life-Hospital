@@ -1,4 +1,4 @@
-import { type CSSProperties, type PointerEvent as ReactPointerEvent, type ReactNode, useEffect, useState } from 'react';
+import { type CSSProperties, type ReactNode, useEffect, useState } from 'react';
 import { ArrowDown, ArrowRight, ArrowUpRight, Check, Clock3, HeartPulse, Instagram, Mail, MapPin, MessageCircle, Phone } from 'lucide-react';
 import {
   BOOKING_WHATSAPP, GOOGLE_REVIEWS, HOSPITAL_ADDRESS_DISPLAY, HOSPITAL_ALT_TEL, HOSPITAL_DIRECTIONS, HOSPITAL_INFO,
@@ -57,21 +57,6 @@ export function InstagramLink({ className = '', children }: { className?: string
   );
 }
 
-// Buttons lean a little toward a mouse pointer; touch and reduced motion are left alone.
-export function magneticPointerMove(event: ReactPointerEvent<HTMLElement>) {
-  if (event.pointerType !== 'mouse' || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const bounds = event.currentTarget.getBoundingClientRect();
-  event.currentTarget.style.setProperty('--magnet-x', `${(event.clientX - bounds.left - bounds.width / 2) * 0.12}px`);
-  event.currentTarget.style.setProperty('--magnet-y', `${(event.clientY - bounds.top - bounds.height / 2) * 0.12}px`);
-}
-
-export function magneticPointerLeave(event: ReactPointerEvent<HTMLElement>) {
-  event.currentTarget.style.setProperty('--magnet-x', '0px');
-  event.currentTarget.style.setProperty('--magnet-y', '0px');
-}
-
-export const magnetic = { onPointerMove: magneticPointerMove, onPointerLeave: magneticPointerLeave };
-
 const ALL_NAV_IDS = ['about', 'services', 'doctors', 'why', 'insurance', 'booking', 'gallery', 'reviews', 'visit', 'faq'] as const;
 // Every section, for the mobile menu and the footer. Gallery and Reviews appear only once they have content.
 export const ALL_LINK_IDS = ALL_NAV_IDS.filter((id) => (id !== 'gallery' || HAS_GALLERY) && (id !== 'reviews' || HAS_REVIEWS));
@@ -88,14 +73,11 @@ export function Header() {
   useEffect(() => {
     let frame = 0;
     let lastY = window.scrollY;
-    const line = document.querySelector<HTMLElement>('.top-progress');
     const onScroll = () => {
       if (frame) return;
       frame = requestAnimationFrame(() => {
         frame = 0;
         const y = window.scrollY;
-        const max = document.documentElement.scrollHeight - window.innerHeight;
-        if (line) line.style.transform = `scaleX(${max > 0 ? y / max : 0})`;
         setScrolled(y > 24);
         // Tuck the header away while reading down the page, bring it back on the way up.
         if (Math.abs(y - lastY) > 6) {
@@ -142,7 +124,7 @@ export function Header() {
           {NAV_IDS.map((id) => <a key={id} className={active === id ? 'is-active' : ''} href={`#${id}`}>{labels[id]}</a>)}
         </nav>
         <LanguageToggle className="header-lang" />
-        <a className="button button-small header-call" href={TEL} aria-label={t.header.callAria(PHONE)} {...magnetic}>
+        <a className="button button-small header-call" href={TEL} aria-label={t.header.callAria(PHONE)}>
           <Icon name="phone" /><span>{t.header.call}</span>
         </a>
         <button

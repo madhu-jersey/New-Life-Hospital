@@ -1,6 +1,6 @@
 import { type FormEvent, useState } from 'react';
 import { CheckCircle2, MessageCircle, ShieldCheck } from 'lucide-react';
-import { Icon, magnetic, PHONE, TEL } from './common';
+import { Icon, PHONE, TEL } from './common';
 import { BOOKING_WHATSAPP, DOCTORS, HOSPITAL_INFO } from '@/lib/hospital';
 import { useLanguage } from '@/lib/i18n';
 import { useClinicClock } from '@/lib/schedule';
@@ -182,7 +182,7 @@ export function Booking() {
                 <label htmlFor="booking-note">{t.booking.note}</label>
                 <textarea id="booking-note" rows={2} placeholder={t.booking.notePlaceholder} value={note} onChange={(event) => setNote(event.target.value)} />
               </div>
-              <button className="button button-whatsapp field-wide" type="submit" {...magnetic}>
+              <button className="button button-whatsapp field-wide" type="submit">
                 <MessageCircle className="icon" aria-hidden="true" /><span>{t.booking.submit}</span>
               </button>
               <p className="booking-privacy field-wide"><ShieldCheck aria-hidden="true" />{t.booking.privacy}</p>

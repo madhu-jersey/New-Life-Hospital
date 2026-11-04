@@ -1,6 +1,6 @@
 import { type CSSProperties, useCallback, useEffect, useRef, useState } from 'react';
 import { Activity, Baby, Clock3, Flower2, FlaskConical, Footprints, Gauge, HandHeart, HeartHandshake, HeartPulse, Plus, TestTube, Waves, ShieldCheck, BadgeCheck, Rotate3d, Sprout, SquarePen, Stethoscope, UserRound } from 'lucide-react';
-import { ALT_PHONE, ALT_TEL, DIRECTIONS, EMAIL, Icon, LANDLINE, LANDLINE_TEL, MAILTO, magnetic, PHONE, TEL } from './common';
+import { ALT_PHONE, ALT_TEL, DIRECTIONS, EMAIL, Icon, LANDLINE, LANDLINE_TEL, MAILTO, PHONE, TEL } from './common';
 import { DOCTORS, HOSPITAL_INFO, HOSPITAL_MAP_EMBED, HOSPITAL_TOURS, type TourKey } from '@/lib/hospital';
 import { useLanguage } from '@/lib/i18n';
 import { GALLERY_PHOTOS, type GalleryPhoto, REVIEW_DATA } from '@/lib/sections';
@@ -20,24 +20,6 @@ export function SectionHead({ title, subline, tone = '' }: { title: string; subl
 const ACCENT_ICON = { heart: HeartPulse, women: Sprout };
 const CARE_ITEM_ICONS = { heart: [HeartPulse, Activity, Footprints, Waves, TestTube, FlaskConical, Gauge], women: [Baby, Flower2, HeartHandshake] };
 
-// Line art behind each care panel: a heartbeat for heart care, unfurling leaves for women's care.
-// Drawn once when the panel scrolls into view.
-function CareArt({ kind }: { kind: 'heart' | 'women' }) {
-  return (
-    <svg className={`care-art care-art--${kind}`} viewBox={kind === 'heart' ? '0 0 600 110' : '0 0 600 240'} preserveAspectRatio="xMaxYMin slice" aria-hidden="true">
-      {kind === 'heart' ? (
-        <path pathLength="1" d="M0 64 H300 l12 0 l8 -12 l8 12 l14 0 l10 -50 l14 84 l10 -46 l16 0 l12 -14 l14 14 H600" />
-      ) : (
-        <>
-          <path pathLength="1" d="M420 240 C420 170 430 120 470 70" />
-          <path pathLength="1" d="M440 150 C400 150 360 120 350 70 C395 75 432 105 440 150 Z" />
-          <path pathLength="1" d="M452 110 C490 100 530 70 540 24 C495 30 460 62 452 110 Z" />
-          <path pathLength="1" d="M426 200 C380 205 330 180 310 140 C360 135 405 160 426 200 Z" />
-        </>
-      )}
-    </svg>
-  );
-}
 export function Doctors() {
   const { t } = useLanguage();
   return (
@@ -76,7 +58,7 @@ export function Doctors() {
                     </ul>
                   </div>
                   {doctor.accent === 'women' && <p className="doctor-note">{t.doctors.infertility}</p>}
-                  <a className="button doctor-book" href={TEL} {...magnetic}><Icon name="phone" /><span>{t.doctors.callToBook}</span></a>
+                  <a className="button doctor-book" href={TEL}><Icon name="phone" /><span>{t.doctors.callToBook}</span></a>
                 </div>
               </article>
             );
@@ -101,7 +83,6 @@ export function Facilities() {
             const photo = doctor ? doctorPhoto(doctor.photoKey) : undefined;
             return (
               <article className={`care care--${group.key} reveal`} key={group.key}>
-                <CareArt kind={group.key} />
                 <header className="care-head">
                   <span className="care-icon"><GroupIcon aria-hidden="true" /></span>
                   <h3>{group.title}</h3>
@@ -752,7 +733,7 @@ export function Visit() {
             </div>
           </dl>
           <div className="visit-actions reveal">
-            <a className="button" href={DIRECTIONS} target="_blank" rel="noopener noreferrer" {...magnetic}><Icon name="pin" /><span>{t.visit.directions}</span></a>
+            <a className="button" href={DIRECTIONS} target="_blank" rel="noopener noreferrer"><Icon name="pin" /><span>{t.visit.directions}</span></a>
           </div>
           {HOSPITAL_INFO.instagramUrl && (
             <a className="visit-instagram reveal" href={HOSPITAL_INFO.instagramUrl} target="_blank" rel="noopener noreferrer" aria-label={t.instagram.aria}>
