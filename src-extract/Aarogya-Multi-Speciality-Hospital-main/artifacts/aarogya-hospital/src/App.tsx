@@ -7,7 +7,7 @@ import NotFound from '@/pages/not-found';
 import { Route, Switch, useLocation, Router as WouterRouter } from 'wouter';
 import { Hero } from './components/Hero';
 import { Header, MobileDock } from './components/common';
-import { About, Doctors, FAQ, Facilities, HospitalGallery, Reviews, Visit, WhyChooseUs } from './components/Sections';
+import { About, Doctors, FAQ, Facilities, HospitalGallery, Insurance, Reviews, Visit, WhyChooseUs } from './components/Sections';
 import { Footer } from './components/Footer';
 import { Booking } from './components/Booking';
 import { updateSearchMetadata } from './lib/seo';
@@ -104,6 +104,7 @@ function App() {
                     <Facilities />
                     <Doctors />
                     <WhyChooseUs />
+                    <Insurance />
                     <Booking />
                     {HAS_GALLERY && <HospitalGallery />}
                     {HAS_REVIEWS && <Reviews />}

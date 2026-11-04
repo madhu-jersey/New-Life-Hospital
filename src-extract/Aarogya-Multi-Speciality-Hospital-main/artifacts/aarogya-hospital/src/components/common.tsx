@@ -72,11 +72,11 @@ export function magneticPointerLeave(event: ReactPointerEvent<HTMLElement>) {
 
 export const magnetic = { onPointerMove: magneticPointerMove, onPointerLeave: magneticPointerLeave };
 
-const ALL_NAV_IDS = ['about', 'services', 'doctors', 'why', 'booking', 'gallery', 'reviews', 'visit', 'faq'] as const;
+const ALL_NAV_IDS = ['about', 'services', 'doctors', 'why', 'insurance', 'booking', 'gallery', 'reviews', 'visit', 'faq'] as const;
 // Every section, for the mobile menu and the footer. Gallery and Reviews appear only once they have content.
 export const ALL_LINK_IDS = ALL_NAV_IDS.filter((id) => (id !== 'gallery' || HAS_GALLERY) && (id !== 'reviews' || HAS_REVIEWS));
 // The desktop header keeps to the main sections so it never wraps.
-export const NAV_IDS = ALL_LINK_IDS.filter((id) => id !== 'gallery' && id !== 'reviews');
+export const NAV_IDS = ALL_LINK_IDS.filter((id) => id !== 'gallery' && id !== 'reviews' && id !== 'insurance');
 
 export function Header() {
   const { t } = useLanguage();

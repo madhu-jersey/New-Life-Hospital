@@ -30,6 +30,7 @@ const en = {
   nav: {
     about: 'About',
     why: 'Why us',
+    insurance: 'Insurance',
     doctors: 'Doctors',
     services: 'Facilities',
     booking: 'Book',
@@ -91,6 +92,16 @@ const en = {
       { title: 'Tests in the same building', line: 'Pregnancy scanning and ECG are done at the hospital, so there is no separate trip for the test.' },
       { title: 'Infertility cases seen at any time', line: 'Infertility cases are attended to at all times, not only in consultation hours. Call before you come.' },
     ],
+  },
+  insurance: {
+    title: 'Insurance & cashless support',
+    subline: 'Medical insurance and cashless treatment with selected empanelled partners.',
+    facilities: ['Medical insurance facilities', 'Cashless insurance facilities'],
+    partnersLabel: 'Selected empanelled partners',
+    partners: ['Star Health', 'HDFC ERGO', 'Tata AIG', 'ICICI Lombard', 'SBI General Insurance', 'Royal Sundaram', 'ManipalCigna', 'ACKO', 'Aditya Birla Health', 'Future Generali'],
+    tpaLabel: 'TPAs',
+    tpa: 'Also associated with TPAs including Medi Assist, FHPL, Paramount Health, MD India & others.',
+    note: 'Cashless facilities are subject to policy terms, eligibility and approval.',
   },
   doctors: {
     title: 'Our specialists',
@@ -267,6 +278,7 @@ const te: Dictionary = {
   nav: {
     about: 'మా గురించి',
     why: 'ఎందుకు మేము',
+    insurance: 'ఇన్సూరెన్స్',
     doctors: 'డాక్టర్లు',
     services: 'సదుపాయాలు',
     booking: 'బుకింగ్',
@@ -328,6 +340,16 @@ const te: Dictionary = {
       { title: 'పరీక్షలు ఇదే భవనంలో', line: 'గర్భిణీ స్కానింగ్ మరియు ఈసీజీ హాస్పిటల్‌లోనే చేస్తారు; పరీక్ష కోసం వేరే చోటికి వెళ్ళనవసరం లేదు.' },
       { title: 'సంతాన లేమి కేసులు ఎప్పుడైనా', line: 'సంతాన లేమి కేసులు సంప్రదింపు సమయాల్లోనే కాదు, అన్ని వేళలా చూడబడును. వచ్చే ముందు కాల్ చేయండి.' },
     ],
+  },
+  insurance: {
+    title: 'ఇన్సూరెన్స్ & క్యాష్‌లెస్ సౌకర్యం',
+    subline: 'ఎంపిక చేసిన ఎంప్యానెల్డ్ భాగస్వాములతో మెడికల్ ఇన్సూరెన్స్ మరియు క్యాష్‌లెస్ చికిత్స.',
+    facilities: ['మెడికల్ ఇన్సూరెన్స్ సౌకర్యం', 'క్యాష్‌లెస్ ఇన్సూరెన్స్ సౌకర్యం'],
+    partnersLabel: 'ఎంపిక చేసిన ఎంప్యానెల్డ్ భాగస్వాములు',
+    partners: ['Star Health', 'HDFC ERGO', 'Tata AIG', 'ICICI Lombard', 'SBI General Insurance', 'Royal Sundaram', 'ManipalCigna', 'ACKO', 'Aditya Birla Health', 'Future Generali'],
+    tpaLabel: 'TPAలు',
+    tpa: 'Medi Assist, FHPL, Paramount Health, MD India మరియు ఇతర TPAలతో కూడా అనుబంధం ఉంది.',
+    note: 'క్యాష్‌లెస్ సౌకర్యం పాలసీ నిబంధనలు, అర్హత మరియు అనుమతికి లోబడి ఉంటుంది.',
   },
   doctors: {
     title: 'మా నిపుణులు',

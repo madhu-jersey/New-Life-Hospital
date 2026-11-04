@@ -1,5 +1,5 @@
 import { type CSSProperties, useCallback, useEffect, useRef, useState } from 'react';
-import { Activity, Baby, Clock3, Flower2, Gauge, HandHeart, HeartHandshake, HeartPulse, Plus, Rotate3d, Sprout, SquarePen, Stethoscope, UserRound } from 'lucide-react';
+import { Activity, Baby, Clock3, Flower2, Gauge, HandHeart, HeartHandshake, HeartPulse, Plus, ShieldCheck, BadgeCheck, Rotate3d, Sprout, SquarePen, Stethoscope, UserRound } from 'lucide-react';
 import { ALT_PHONE, ALT_TEL, DIRECTIONS, EMAIL, Icon, LANDLINE, LANDLINE_TEL, MAILTO, magnetic, PHONE, TEL } from './common';
 import { DOCTORS, HOSPITAL_INFO, HOSPITAL_MAP_EMBED, HOSPITAL_TOURS, type TourKey } from '@/lib/hospital';
 import { useLanguage } from '@/lib/i18n';
@@ -194,6 +194,30 @@ export function WhyChooseUs() {
             );
           })}
         </ul>
+      </div>
+    </section>
+  );
+}
+
+// Insurers are shown as plain names, without logos.
+export function Insurance() {
+  const { t } = useLanguage();
+  return (
+    <section className="section insurance" id="insurance">
+      <div className="container">
+        <SectionHead title={t.insurance.title} subline={t.insurance.subline} />
+        <ul className="insurance-facilities reveal">
+          {t.insurance.facilities.map((facility, index) => {
+            const FacilityIcon = index === 0 ? ShieldCheck : BadgeCheck;
+            return <li key={facility}><FacilityIcon aria-hidden="true" />{facility}</li>;
+          })}
+        </ul>
+        <h3 className="insurance-label reveal">{t.insurance.partnersLabel}</h3>
+        <ul className="insurance-grid">
+          {t.insurance.partners.map((partner) => <li className="insurance-partner reveal" key={partner}>{partner}</li>)}
+        </ul>
+        <p className="insurance-tpa reveal"><strong>{t.insurance.tpaLabel}</strong>{t.insurance.tpa}</p>
+        <p className="insurance-note reveal">{t.insurance.note}</p>
       </div>
     </section>
   );
