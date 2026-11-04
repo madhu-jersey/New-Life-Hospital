@@ -36,7 +36,7 @@ export function buildStructuredData(origin: string) {
         '@id': hospitalId,
         name: HOSPITAL_INFO.name,
         alternateName: HOSPITAL_ALTERNATE_NAMES,
-        description: `${HOSPITAL_INFO.name} is a hospital on Tanuku Vari Street, ${HOSPITAL_INFO.nearbyCity}, ${HOSPITAL_INFO.region}, offering obstetrics and gynaecology, pregnancy care and scanning, infertility treatment including IUI, and cardiology with ECG.`,
+        description: `${HOSPITAL_INFO.name} is a hospital on Tanuku Vari Street, ${HOSPITAL_INFO.nearbyCity}, ${HOSPITAL_INFO.region}, offering obstetrics and gynaecology, pregnancy care and scanning, infertility treatment including IUI, and cardiology with ECG, 2D Echo and TMT.`,
         slogan: 'Women’s care and heart care in Tanuku.',
         url: homeUrl,
         telephone: HOSPITAL_INFO.phone,

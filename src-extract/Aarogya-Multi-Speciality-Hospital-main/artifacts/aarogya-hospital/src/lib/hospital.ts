@@ -40,7 +40,7 @@ export const HOSPITAL_INFO = {
   image: '/assets/hospital-entrance.webp',
   imageWebpSrcSet: '',
   title: 'New Life Hospital, Tanuku | Gynaecology, Pregnancy, Infertility (IUI) & Cardiology',
-  description: 'New Life Hospital, Tanuku Vari Street, Tanuku: obstetrics, gynaecology, pregnancy care and infertility (IUI) with Dr. K. N. Vandana, and cardiology with Dr. U. Venkatesh (ECG, heart care).',
+  description: 'New Life Hospital, Tanuku Vari Street, Tanuku: obstetrics, gynaecology, pregnancy care and infertility (IUI) with Dr. K. N. Vandana, and cardiology with Dr. U. Venkatesh (ECG, 2D Echo, TMT, heart care). Lab tests and cashless insurance.',
 };
 
 // Spellings people actually type when searching for the hospital.
@@ -67,6 +67,10 @@ export const MEDICAL_SERVICES: { type: 'MedicalProcedure' | 'MedicalTest' | 'Med
   { type: 'MedicalProcedure', name: 'Intrauterine insemination (IUI)' },
   { type: 'MedicalTherapy', name: 'Heart disease treatment' },
   { type: 'MedicalTest', name: 'ECG' },
+  { type: 'MedicalTest', name: 'TMT (treadmill test)' },
+  { type: 'MedicalTest', name: '2D Echo' },
+  { type: 'MedicalTest', name: 'Trop T test' },
+  { type: 'MedicalTest', name: 'Lab tests' },
   { type: 'MedicalTherapy', name: 'Blood pressure and thyroid consultation' },
 ];
 
@@ -170,7 +174,7 @@ export const DOCTORS = [
     department: 'Cardiology',
     medicalSpecialty: 'https://schema.org/Cardiovascular',
     degree: 'M.D., D.M. (Cardiology)',
-    care: 'Heart diseases, ECG, blood pressure and thyroid.',
+    care: 'Heart diseases, ECG, 2D Echo, TMT, blood pressure and thyroid.',
     slots: [{ start: 17 * 60, end: 20 * 60 }] as Slot[],
     timings: ['5:00 PM to 8:00 PM'],
   },
@@ -197,8 +201,8 @@ export const FAQ_ITEMS = [
     answer: 'Yes. Dr. U. Venkatesh, M.D., D.M. (Cardiology), a senior interventional cardiologist and former Assistant Professor at SVIMS, consults at New Life Hospital, Tanuku Vari Street, Tanuku, from 5:00 PM to 8:00 PM, Monday to Saturday.',
   },
   {
-    question: 'Can I get an ECG test in Tanuku?',
-    answer: 'Yes. ECG is done at New Life Hospital, Tanuku, and you can consult cardiologist Dr. U. Venkatesh in the evening, from 5:00 PM to 8:00 PM, for heart diseases.',
+    question: 'Can I get an ECG, 2D Echo or TMT test in Tanuku?',
+    answer: 'Yes. ECG, 2D Echo, TMT (treadmill test) and Trop T tests are done at New Life Hospital, Tanuku, and you can consult cardiologist Dr. U. Venkatesh in the evening, from 5:00 PM to 8:00 PM, for heart diseases.',
   },
   {
     question: 'Which doctor treats blood pressure and thyroid problems in Tanuku?',

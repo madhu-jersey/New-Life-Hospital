@@ -72,11 +72,11 @@ const en = {
     infertility: 'Infertility cases are attended to at all times.',
     callAhead: 'Call ahead',
   },
-  band: ['Gynaecology', 'Pregnancy care & scanning', 'Infertility & IUI', 'Cardiology', 'ECG', 'Blood pressure & thyroid'],
+  band: ['Gynaecology', 'Pregnancy care & scanning', 'Infertility & IUI', 'Cardiology', 'ECG', '2D Echo', 'TMT', 'Lab tests', 'Blood pressure & thyroid'],
   about: {
     title: 'About New Life Hospital',
     paragraphs: [
-      'New Life Hospital on Tanuku Vari Street brings women’s care and heart care under one roof. A family can see either specialist, have a pregnancy scan or an ECG, and get infertility treatment, including IUI, in the same hospital.',
+      'New Life Hospital on Tanuku Vari Street has a gynaecologist and a cardiologist in the same hospital. Pregnancy scans, ECG, 2D Echo, TMT and lab tests are done here, and infertility treatment, including IUI, is available.',
     ],
     values: [
       { title: 'Patient-centred approach', line: 'Care planned around each patient, with every step explained.' },
@@ -86,16 +86,16 @@ const en = {
   },
   why: {
     title: 'Why choose New Life',
-    subline: 'What you get when you consult here.',
+    subline: '',
     reasons: [
       { title: 'Two specialists, one hospital', line: 'See the gynaecologist and the cardiologist in the same building, Monday to Saturday.' },
-      { title: 'Tests in the same building', line: 'Pregnancy scanning and ECG are done at the hospital, so there is no separate trip for the test.' },
+      { title: 'Tests in the same building', line: 'Pregnancy scanning, ECG, 2D Echo, TMT and lab tests are done at the hospital, so there is no separate trip for tests.' },
       { title: 'Infertility cases seen at any time', line: 'Infertility cases are attended to at all times, not only in consultation hours. Call before you come.' },
     ],
   },
   insurance: {
     title: 'Insurance & cashless support',
-    subline: 'Medical insurance and cashless treatment with selected empanelled partners.',
+    subline: 'Cashless treatment is available with the insurance companies below.',
     facilities: ['Medical insurance facilities', 'Cashless insurance facilities'],
     partnersLabel: 'Selected empanelled partners',
     partners: ['Star Health', 'HDFC ERGO', 'Tata AIG', 'ICICI Lombard', 'SBI General Insurance', 'Royal Sundaram', 'ManipalCigna', 'ACKO', 'Aditya Birla Health', 'Future Generali'],
@@ -200,7 +200,7 @@ const en = {
     insideLine: 'A 360° view of the hospital from Google Maps. Drag to look around.',
     insideStart: 'Start 360° view',
     insideHint: 'Inside 360°: tap, then drag to look around',
-    captions: ['Hospital entrance', 'Reception and waiting hall', 'Operation theatre', 'Waiting area', 'Hospital building', 'Corridor', 'Special room', 'Special room', 'Special room', 'Normal room', 'Room', 'Room', 'Rooms corridor', 'Laboratory', 'Laboratory', 'Laboratory'] as string[],
+    captions: ['Hospital entrance', 'Reception and waiting hall', 'Operation theatre', 'Waiting area', 'Hospital building', 'Corridor', 'Special room', 'Special room', 'Special room', 'Room', 'Room', 'Room', 'Rooms corridor', 'Laboratory', 'Laboratory', 'Laboratory'] as string[],
     placeholder: 'Photo coming soon',
     more: (count: number) => `View ${count} more photo${count === 1 ? '' : 's'}`,
     less: 'Show fewer photos',
@@ -324,11 +324,11 @@ const te: Dictionary = {
     infertility: 'సంతాన లేమి కేసులు అన్ని వేళలా చూడబడును.',
     callAhead: 'ముందుగా కాల్ చేయండి',
   },
-  band: ['గైనకాలజీ', 'గర్భిణీ వైద్యం & స్కానింగ్', 'సంతాన లేమి & IUI', 'కార్డియాలజీ', 'ఈసీజీ', 'బీపీ & థైరాయిడ్'],
+  band: ['గైనకాలజీ', 'గర్భిణీ వైద్యం & స్కానింగ్', 'సంతాన లేమి & IUI', 'కార్డియాలజీ', 'ఈసీజీ', '2డి ఎకో', 'టీఎంటీ', 'ల్యాబ్ పరీక్షలు', 'బీపీ & థైరాయిడ్'],
   about: {
     title: 'న్యూ లైఫ్ హాస్పిటల్ గురించి',
     paragraphs: [
-      'తణుకు వారి వీధిలోని న్యూ లైఫ్ హాస్పిటల్‌లో స్త్రీ వైద్యం, గుండె వైద్యం ఒకే చోట. ఒకే హాస్పిటల్‌లో నిపుణులను కలవచ్చు, గర్భిణీ స్కానింగ్ లేదా ఈసీజీ చేయించుకోవచ్చు, IUI తో సహా సంతాన లేమి చికిత్స పొందవచ్చు.',
+      'తణుకు వారి వీధిలోని న్యూ లైఫ్ హాస్పిటల్‌లో గైనకాలజిస్ట్, కార్డియాలజిస్ట్ ఇద్దరూ ఒకే హాస్పిటల్‌లో ఉన్నారు. గర్భిణీ స్కానింగ్, ఈసీజీ, 2డి ఎకో, టీఎంటీ, ల్యాబ్ పరీక్షలు ఇక్కడే చేస్తారు; IUI తో సహా సంతాన లేమి చికిత్స కూడా అందుబాటులో ఉంది.',
     ],
     values: [
       { title: 'రోగి కేంద్రిత విధానం', line: 'ప్రతి రోగికి అనుగుణంగా వైద్యం, ప్రతి దశను వివరిస్తూ.' },
@@ -338,16 +338,16 @@ const te: Dictionary = {
   },
   why: {
     title: 'న్యూ లైఫ్‌నే ఎందుకు ఎంచుకోవాలి',
-    subline: 'ఇక్కడ సంప్రదిస్తే మీకు లభించేవి.',
+    subline: '',
     reasons: [
       { title: 'ఒకే హాస్పిటల్‌లో ఇద్దరు నిపుణులు', line: 'సోమవారం నుండి శనివారం, గైనకాలజిస్ట్ మరియు కార్డియాలజిస్ట్ ఒకే భవనంలో.' },
-      { title: 'పరీక్షలు ఇదే భవనంలో', line: 'గర్భిణీ స్కానింగ్ మరియు ఈసీజీ హాస్పిటల్‌లోనే చేస్తారు; పరీక్ష కోసం వేరే చోటికి వెళ్ళనవసరం లేదు.' },
+      { title: 'పరీక్షలు ఇదే భవనంలో', line: 'గర్భిణీ స్కానింగ్, ఈసీజీ, 2డి ఎకో, టీఎంటీ, ల్యాబ్ పరీక్షలు హాస్పిటల్‌లోనే చేస్తారు; పరీక్షల కోసం వేరే చోటికి వెళ్ళనవసరం లేదు.' },
       { title: 'సంతాన లేమి కేసులు ఎప్పుడైనా', line: 'సంతాన లేమి కేసులు సంప్రదింపు సమయాల్లోనే కాదు, అన్ని వేళలా చూడబడును. వచ్చే ముందు కాల్ చేయండి.' },
     ],
   },
   insurance: {
     title: 'ఇన్సూరెన్స్ & క్యాష్‌లెస్ సౌకర్యం',
-    subline: 'ఎంపిక చేసిన ఎంప్యానెల్డ్ భాగస్వాములతో మెడికల్ ఇన్సూరెన్స్ మరియు క్యాష్‌లెస్ చికిత్స.',
+    subline: 'కింది ఇన్సూరెన్స్ కంపెనీలతో క్యాష్‌లెస్ చికిత్స అందుబాటులో ఉంది.',
     facilities: ['మెడికల్ ఇన్సూరెన్స్ సౌకర్యం', 'క్యాష్‌లెస్ ఇన్సూరెన్స్ సౌకర్యం'],
     partnersLabel: 'ఎంపిక చేసిన ఎంప్యానెల్డ్ భాగస్వాములు',
     partners: ['Star Health', 'HDFC ERGO', 'Tata AIG', 'ICICI Lombard', 'SBI General Insurance', 'Royal Sundaram', 'ManipalCigna', 'ACKO', 'Aditya Birla Health', 'Future Generali'],
@@ -452,7 +452,7 @@ const te: Dictionary = {
     insideLine: 'గూగుల్ మ్యాప్స్ నుండి హాస్పిటల్ 360° వ్యూ. చుట్టూ చూడటానికి లాగండి.',
     insideStart: '360° వ్యూ ప్రారంభించండి',
     insideHint: 'లోపల 360°: నొక్కి, చుట్టూ చూడటానికి లాగండి',
-    captions: ['హాస్పిటల్ ప్రవేశ ద్వారం', 'రిసెప్షన్ మరియు వెయిటింగ్ హాల్', 'ఆపరేషన్ థియేటర్', 'వెయిటింగ్ ఏరియా', 'హాస్పిటల్ భవనం', 'కారిడార్', 'స్పెషల్ రూమ్', 'స్పెషల్ రూమ్', 'స్పెషల్ రూమ్', 'నార్మల్ రూమ్', 'రూమ్', 'రూమ్', 'రూమ్‌ల కారిడార్', 'ల్యాబొరేటరీ', 'ల్యాబొరేటరీ', 'ల్యాబొరేటరీ'],
+    captions: ['హాస్పిటల్ ప్రవేశ ద్వారం', 'రిసెప్షన్ మరియు వెయిటింగ్ హాల్', 'ఆపరేషన్ థియేటర్', 'వెయిటింగ్ ఏరియా', 'హాస్పిటల్ భవనం', 'కారిడార్', 'స్పెషల్ రూమ్', 'స్పెషల్ రూమ్', 'స్పెషల్ రూమ్', 'రూమ్', 'రూమ్', 'రూమ్', 'రూమ్‌ల కారిడార్', 'ల్యాబొరేటరీ', 'ల్యాబొరేటరీ', 'ల్యాబొరేటరీ'],
     placeholder: 'ఫోటో త్వరలో',
     more: (count: number) => `మరో ${count} ఫోటోలు చూడండి`,
     less: 'తక్కువ ఫోటోలు చూపించు',
@@ -511,7 +511,7 @@ const te: Dictionary = {
       { question: 'తణుకులో IUI, సంతాన లేమి చికిత్స అందుబాటులో ఉందా?', answer: 'అవును. న్యూ లైఫ్ హాస్పిటల్, తణుకులో డా. కె. ఎన్. వందన ద్వారా IUI (గర్భాశయంలోకి వీర్యకణాల ప్రవేశం) తో సహా ఆధునిక పద్ధతుల్లో సంతాన లేమి చికిత్స అందుతుంది. సంతాన లేమి కేసులు అన్ని వేళలా చూడబడును; వచ్చే ముందు కాల్ చేయండి.' },
       { question: 'తణుకులో గర్భిణీ వైద్యం, స్కానింగ్ ఎక్కడ దొరుకుతుంది?', answer: 'తణుకు వారి వీధిలోని న్యూ లైఫ్ హాస్పిటల్‌లో ప్రసూతి, స్త్రీ వైద్య నిపుణులు డా. కె. ఎన్. వందన ద్వారా గర్భిణీ స్త్రీలకు వైద్య సేవలు, స్కానింగ్, అలాగే గర్భాశయ సంబంధిత వ్యాధులకు చికిత్స అందుతాయి.' },
       { question: 'తణుకులో గుండె డాక్టర్ (కార్డియాలజిస్ట్) ఉన్నారా?', answer: 'అవును. డా. యు. వెంకటేష్, M.D., D.M. (కార్డియాలజీ), సీనియర్ ఇంటర్వెన్షనల్ కార్డియాలజిస్ట్ మరియు SVIMS పూర్వ అసిస్టెంట్ ప్రొఫెసర్, తణుకు వారి వీధిలోని న్యూ లైఫ్ హాస్పిటల్‌లో సోమవారం నుండి శనివారం సాయంత్రం 5:00 నుండి రాత్రి 8:00 వరకు చూస్తారు.' },
-      { question: 'తణుకులో ఈసీజీ పరీక్ష చేయించుకోవచ్చా?', answer: 'అవును. న్యూ లైఫ్ హాస్పిటల్, తణుకులో ఈసీజీ చేస్తారు; గుండె వ్యాధుల కోసం కార్డియాలజిస్ట్ డా. యు. వెంకటేష్‌ను సాయంత్రం 5:00 నుండి రాత్రి 8:00 వరకు సంప్రదించవచ్చు.' },
+      { question: 'తణుకులో ఈసీజీ, 2డి ఎకో లేదా టీఎంటీ పరీక్ష చేయించుకోవచ్చా?', answer: 'అవును. న్యూ లైఫ్ హాస్పిటల్, తణుకులో ఈసీజీ, 2డి ఎకో, టీఎంటీ (ట్రెడ్‌మిల్ పరీక్ష), ట్రోప్ టి పరీక్షలు చేస్తారు; గుండె వ్యాధుల కోసం కార్డియాలజిస్ట్ డా. యు. వెంకటేష్‌ను సాయంత్రం 5:00 నుండి రాత్రి 8:00 వరకు సంప్రదించవచ్చు.' },
       { question: 'తణుకులో బీపీ, థైరాయిడ్ సమస్యలకు ఏ డాక్టర్‌ను కలవాలి?', answer: 'న్యూ లైఫ్ హాస్పిటల్, తణుకులో డా. యు. వెంకటేష్, M.D., D.M. (కార్డియాలజీ), సోమవారం నుండి శనివారం సాయంత్రం 5:00 నుండి రాత్రి 8:00 వరకు బీపీ, థైరాయిడ్ సంప్రదింపులు చూస్తారు.' },
       { question: 'న్యూ లైఫ్ హాస్పిటల్, తణుకు ఓపీ సమయాలు ఏమిటి?', answer: 'ప్రసూతి & స్త్రీ వైద్యం (డా. కె. ఎన్. వందన): ఉదయం 9:00 నుండి మధ్యాహ్నం 1:00 వరకు, సాయంత్రం 5:00 నుండి రాత్రి 7:00 వరకు. కార్డియాలజీ (డా. యు. వెంకటేష్): సాయంత్రం 5:00 నుండి రాత్రి 8:00 వరకు. సోమవారం నుండి శనివారం; ఆదివారం సెలవు.' },
       { question: 'న్యూ లైఫ్ హాస్పిటల్, తణుకు ఆదివారం తెరిచి ఉంటుందా?', answer: 'లేదు. సాధారణ సంప్రదింపులకు ఆదివారం సెలవు. సంతాన లేమి కేసులు అన్ని వేళలా చూడబడును; ముందుగా హాస్పిటల్‌కు కాల్ చేయండి.' },

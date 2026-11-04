@@ -141,7 +141,7 @@ main, footer, .nav { transition: opacity .18s ease; }
 .hero-lead { margin-top: 28px; max-width: 50ch; color: var(--muted); font-size: 19px; line-height: 1.6; animation: fadeIn 1s var(--ease) .55s both; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; animation: fadeIn 1s var(--ease) .65s both; }
 .hero-note { margin-top: 20px; color: var(--muted); font-size: 14px; animation: fadeIn 1s var(--ease) .75s both; }
-.hero-note a { color: var(--leaf-deep); font-weight: 600; border-bottom: 1px solid var(--marigold); }
+.hero-note a { color: var(--leaf-deep); font-weight: 600; border-bottom: 1px solid var(--marigold); white-space: nowrap; }
 
 /* The single orchestrated moment: one heartbeat drawn across the page on load. */
 .hero-ecg { position: absolute; z-index: -1; left: 0; right: 0; bottom: 36px; width: 100%; height: 140px; pointer-events: none; }

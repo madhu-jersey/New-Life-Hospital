@@ -59,7 +59,7 @@ export function Hero() {
           <div className="hero-copy">
             <p className="hero-place"><Icon name="pin" />{t.hero.place}</p>
             <h1 className="hero-title">
-              <span className="mask"><span>{HOSPITAL_INFO.shortName}</span></span>
+              <span className="mask"><span>{HOSPITAL_INFO.shortName}</span></span>{' '}
               <span className="mask"><span className="hero-title-sub">Hospital</span></span>
             </h1>
             <p className="hero-other telugu-display" lang="te">{HOSPITAL_INFO.teluguName}</p>
