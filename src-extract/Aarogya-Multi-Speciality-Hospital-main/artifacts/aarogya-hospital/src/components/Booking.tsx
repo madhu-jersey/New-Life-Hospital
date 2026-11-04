@@ -4,8 +4,9 @@ import { Icon, PHONE, TEL } from './common';
 import { BOOKING_WHATSAPP, DOCTORS, HOSPITAL_INFO } from '@/lib/hospital';
 import { useLanguage } from '@/lib/i18n';
 import { useClinicClock } from '@/lib/schedule';
+import { DICTIONARIES } from '@/lib/translations';
 
-type Errors = Partial<Record<'name' | 'phone' | 'date', string>>;
+type Errors = Partial<Record<'name' | 'phone' | 'doctor' | 'date' | 'time', string>>;
 
 const ANY = 'any';
 
@@ -30,17 +31,25 @@ function bookingDays(minutesNow: number): BookingDay[] {
   });
 }
 
+// WhatsApp shows *text* in bold. Strip its formatting characters from what the patient typed so their
+// text cannot break the bold markers.
+const plain = (value: string) => value.replace(/[*_~`]/g, '').replace(/\s+/g, ' ').trim();
+const bold = (value: string) => `*${plain(value)}*`;
+
 // The request goes to the hospital in English whatever language the visitor reads the site in.
 function buildMessage(fields: { name: string; phone: string; doctor: string; date: string; time: string; note: string }) {
   const doctor = DOCTORS.find((item) => item.initials === fields.doctor);
+  const date = noonUtc(fields.date).toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
   return [
-    `Appointment request – ${HOSPITAL_INFO.name}`,
-    `Patient: ${fields.name}`,
-    `Mobile: ${fields.phone}`,
-    `Doctor: ${doctor ? `${doctor.name} (${doctor.department})` : 'Not sure / general enquiry'}`,
-    `Preferred date: ${noonUtc(fields.date).toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' })}`,
-    `Preferred time: ${fields.time === ANY ? 'Any time' : fields.time}`,
-    ...(fields.note ? [`Reason: ${fields.note}`] : []),
+    `*APPOINTMENT REQUEST*`,
+    `${HOSPITAL_INFO.name}, ${HOSPITAL_INFO.nearbyCity}`,
+    '',
+    `Patient name: ${bold(fields.name)}`,
+    `Mobile: ${bold(fields.phone)}`,
+    `Doctor: ${bold(doctor ? `${doctor.name} (${doctor.department})` : 'Not sure / general enquiry')}`,
+    `Date: ${bold(date)}`,
+    `Time: ${bold(fields.time === ANY ? 'Any time' : fields.time)}`,
+    ...(plain(fields.note) ? [`Reason: ${bold(fields.note)}`] : []),
   ].join('\n');
 }
 
@@ -48,12 +57,13 @@ export function Booking() {
   const { t, lang } = useLanguage();
   const clock = useClinicClock();
   const days = bookingDays(clock.minutes);
-  const firstOpenDay = days.find((day) => !day.sunday)?.iso ?? '';
+  // Nothing is pre-selected: the patient has to pick a doctor, a day and a time themselves.
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
-  const [doctor, setDoctor] = useState<string>(DOCTORS[0]?.initials ?? ANY);
-  const [date, setDate] = useState(firstOpenDay);
-  const [slot, setSlot] = useState(0);
+  const [doctor, setDoctor] = useState('');
+  const [date, setDate] = useState('');
+  // '' = not chosen, 'any' = any time (general enquiry), otherwise the index of the doctor's slot.
+  const [time, setTime] = useState('');
   const [note, setNote] = useState('');
   const [errors, setErrors] = useState<Errors>({});
   const [sent, setSent] = useState(false);
@@ -64,13 +74,16 @@ export function Booking() {
   // Time choices follow the chosen doctor's hours; for today, slots that have already ended are left out.
   // Slots are stored by index so a language switch keeps the choice.
   const doctorData = DOCTORS.find((item) => item.initials === doctor);
-  const slotLabels = doctor === ANY ? [] : t.doctors.list[doctor].timings;
+  const slotLabels = doctorData ? t.doctors.list[doctorData.initials].timings : [];
   const openSlots = (doctorData?.slots ?? [])
     .map((item, index) => ({ ...item, index }))
     .filter((item) => !(chosenDay?.offset === 0 && clock.minutes >= item.end))
     .map((item) => item.index);
   const noSlotsLeft = Boolean(doctorData) && openSlots.length === 0;
-  const activeSlot = openSlots.includes(slot) ? slot : openSlots[0];
+  // A slot picked earlier that has since closed (another day was chosen, or time passed) is no longer a choice.
+  const timeValid = doctor === ANY ? time === ANY : time !== '' && time !== ANY && openSlots.includes(Number(time));
+  const timeValue = timeValid ? time : '';
+  const clearError = (key: keyof Errors) => setErrors((current) => ({ ...current, [key]: undefined }));
 
   const dayName = (day: BookingDay) => {
     if (day.offset === 0) return t.booking.today;
@@ -85,21 +98,33 @@ export function Booking() {
     const next: Errors = {};
     if (!name.trim()) next.name = t.booking.errors.name;
     if (!/^[6-9]\d{9}$/.test(digits)) next.phone = t.booking.errors.phone;
+    if (!doctor) next.doctor = t.booking.errors.doctor;
     if (!chosenDay) next.date = t.booking.errors.date;
     else if (noSlotsLeft) next.date = t.booking.errors.noSlots;
+    if (doctor && !noSlotsLeft && !timeValid) next.time = t.booking.errors.time;
     setErrors(next);
-    if (Object.keys(next).length) {
-      event.currentTarget.querySelector<HTMLElement>('[aria-invalid="true"]')?.focus();
+    // Move to the first field that still needs filling, in the order the form shows them.
+    const firstMissing = (['name', 'phone', 'doctor', 'date', 'time'] as const).find((key) => next[key]);
+    if (firstMissing) {
+      const target = {
+        name: '#booking-name',
+        phone: '#booking-phone',
+        doctor: 'input[name="booking-doctor"]',
+        date: 'input[name="booking-date"]:not(:disabled)',
+        time: '#booking-time',
+      }[firstMissing];
+      event.currentTarget.querySelector<HTMLElement>(target)?.focus();
       return;
     }
-    const time = activeSlot === undefined ? ANY : doctorData?.timings[activeSlot] ?? ANY;
-    const message = buildMessage({ name: name.trim(), phone: digits, doctor, date, time, note: note.trim() });
+    // English labels such as "Morning, 9:00 AM to 1:00 PM", matching what the form showed.
+    const timeText = time === ANY || !doctorData ? ANY : DICTIONARIES.en.doctors.list[doctorData.initials].timings[Number(time)] ?? ANY;
+    const message = buildMessage({ name: name.trim(), phone: digits, doctor, date, time: timeText, note: note.trim() });
     window.open(`https://wa.me/${BOOKING_WHATSAPP}?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
     setSent(true);
   };
 
   const reset = () => {
-    setName(''); setPhone(''); setDate(firstOpenDay); setNote(''); setSlot(0); setErrors({}); setSent(false);
+    setName(''); setPhone(''); setDoctor(''); setDate(''); setTime(''); setNote(''); setErrors({}); setSent(false);
   };
 
   return (
@@ -121,30 +146,32 @@ export function Booking() {
             </div>
           ) : (
             <form className="booking-form" noValidate onSubmit={submit}>
+              <p className="booking-required field-wide"><span className="req" aria-hidden="true">*</span> {t.booking.requiredNote}</p>
               <div className="field">
-                <label htmlFor="booking-name">{t.booking.name}</label>
-                <input id="booking-name" type="text" autoComplete="name" placeholder={t.booking.namePlaceholder} value={name} onChange={(event) => setName(event.target.value)} aria-invalid={Boolean(errors.name)} aria-describedby={errors.name ? 'booking-name-error' : undefined} />
+                <label htmlFor="booking-name">{t.booking.name} <span className="req" aria-hidden="true">*</span></label>
+                <input id="booking-name" type="text" autoComplete="name" required placeholder={t.booking.namePlaceholder} value={name} onChange={(event) => { setName(event.target.value); clearError('name'); }} aria-invalid={Boolean(errors.name)} aria-describedby={errors.name ? 'booking-name-error' : undefined} />
                 {errors.name && <span className="field-error" id="booking-name-error">{errors.name}</span>}
               </div>
               <div className="field">
-                <label htmlFor="booking-phone">{t.booking.phone}</label>
-                <input id="booking-phone" type="tel" inputMode="tel" autoComplete="tel" placeholder={t.booking.phonePlaceholder} value={phone} onChange={(event) => setPhone(event.target.value)} aria-invalid={Boolean(errors.phone)} aria-describedby={errors.phone ? 'booking-phone-error' : undefined} />
+                <label htmlFor="booking-phone">{t.booking.phone} <span className="req" aria-hidden="true">*</span></label>
+                <input id="booking-phone" type="tel" inputMode="tel" autoComplete="tel" required placeholder={t.booking.phonePlaceholder} value={phone} onChange={(event) => { setPhone(event.target.value); clearError('phone'); }} aria-invalid={Boolean(errors.phone)} aria-describedby={errors.phone ? 'booking-phone-error' : undefined} />
                 {errors.phone && <span className="field-error" id="booking-phone-error">{errors.phone}</span>}
               </div>
-              <fieldset className="field field-wide doctor-pick">
-                <legend>{t.booking.doctor}</legend>
+              <fieldset className="field field-wide doctor-pick" aria-describedby={errors.doctor ? 'booking-doctor-error' : undefined}>
+                <legend>{t.booking.doctor} <span className="req" aria-hidden="true">*</span></legend>
                 {[...DOCTORS.map((item) => item.initials), ANY].map((value) => (
                   <label className="doctor-option" key={value}>
-                    <input type="radio" name="booking-doctor" value={value} checked={doctor === value} onChange={() => { setDoctor(value); setSlot(0); }} />
+                    <input type="radio" name="booking-doctor" value={value} required checked={doctor === value} aria-invalid={Boolean(errors.doctor)} onChange={() => { setDoctor(value); setTime(value === ANY ? ANY : ''); clearError('doctor'); clearError('time'); }} />
                     <span>
                       <strong>{value === ANY ? t.booking.anyDoctor : t.doctors.list[value].name}</strong>
                       {value !== ANY && <small>{t.doctors.list[value].department}</small>}
                     </span>
                   </label>
                 ))}
+                {errors.doctor && <span className="field-error" id="booking-doctor-error">{errors.doctor}</span>}
               </fieldset>
               <fieldset className="field field-wide day-pick" aria-describedby={errors.date ? 'booking-date-error booking-date-hint' : 'booking-date-hint'}>
-                <legend>{t.booking.date}</legend>
+                <legend>{t.booking.date} <span className="req" aria-hidden="true">*</span></legend>
                 {days.map((day) => (
                   <label className={`day-option${day.sunday ? ' is-holiday' : ''}`} key={day.iso}>
                     <input
@@ -153,8 +180,9 @@ export function Booking() {
                       value={day.iso}
                       checked={date === day.iso}
                       disabled={day.sunday}
+                      required
                       aria-invalid={Boolean(errors.date)}
-                      onChange={() => { setDate(day.iso); setErrors((current) => ({ ...current, date: undefined })); }}
+                      onChange={() => { setDate(day.iso); clearError('date'); }}
                     />
                     <span>
                       <strong>{dayName(day)}</strong>
@@ -166,17 +194,21 @@ export function Booking() {
                 {errors.date && <span className="field-error" id="booking-date-error">{errors.date}</span>}
               </fieldset>
               <div className="field field-wide">
-                <label htmlFor="booking-time">{t.booking.time}</label>
+                <label htmlFor="booking-time">{t.booking.time} <span className="req" aria-hidden="true">*</span></label>
                 <select
                   id="booking-time"
-                  value={activeSlot ?? -1}
-                  onChange={(event) => setSlot(Number(event.target.value))}
-                  disabled={!slotLabels.length || noSlotsLeft}
+                  required
+                  value={timeValue}
+                  onChange={(event) => { setTime(event.target.value); clearError('time'); }}
+                  disabled={!doctor || noSlotsLeft}
+                  aria-invalid={Boolean(errors.time)}
+                  aria-describedby={errors.time ? 'booking-time-error' : undefined}
                 >
-                  {!slotLabels.length && <option value={-1}>{t.booking.anyTime}</option>}
-                  {slotLabels.length > 0 && noSlotsLeft && <option value={-1}>{t.booking.noSlotsOption}</option>}
-                  {openSlots.map((index) => <option key={index} value={index}>{slotLabels[index]}</option>)}
+                  <option value="" disabled>{!doctor ? t.booking.chooseDoctorFirst : noSlotsLeft ? t.booking.noSlotsOption : t.booking.chooseTime}</option>
+                  {doctor === ANY && <option value={ANY}>{t.booking.anyTime}</option>}
+                  {doctor !== ANY && openSlots.map((index) => <option key={index} value={String(index)}>{slotLabels[index]}</option>)}
                 </select>
+                {errors.time && <span className="field-error" id="booking-time-error">{errors.time}</span>}
               </div>
               <div className="field field-wide">
                 <label htmlFor="booking-note">{t.booking.note}</label>

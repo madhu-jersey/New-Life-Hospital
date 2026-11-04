@@ -312,6 +312,8 @@ main, footer, .nav { transition: opacity .18s ease; }
 .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--leaf); background: #fff; box-shadow: 0 0 0 4px rgba(30, 107, 60, .14); }
 .field [aria-invalid="true"] { border-color: var(--vermilion); }
 .field-error { color: var(--vermilion); font-size: 13px; font-weight: 600; }
+.req { color: var(--vermilion); font-weight: 700; }
+.booking-required { margin: 0; color: var(--muted); font-size: 13.5px; }
 .doctor-pick { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
 .doctor-pick legend { margin-bottom: 8px; }
 .doctor-option { position: relative; cursor: pointer; }
