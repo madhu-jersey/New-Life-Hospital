@@ -71,7 +71,6 @@ export const MEDICAL_SERVICES: { type: 'MedicalProcedure' | 'MedicalTest' | 'Med
   { type: 'MedicalTest', name: '2D Echo' },
   { type: 'MedicalTest', name: 'Trop T test' },
   { type: 'MedicalTest', name: 'Lab tests' },
-  { type: 'MedicalTherapy', name: 'Blood pressure and thyroid consultation' },
 ];
 
 // schema.org MedicalSpecialty values covered by the hospital.
@@ -174,7 +173,7 @@ export const DOCTORS = [
     department: 'Cardiology',
     medicalSpecialty: 'https://schema.org/Cardiovascular',
     degree: 'M.D., D.M. (Cardiology)',
-    care: 'Heart diseases, ECG, 2D Echo, TMT, blood pressure and thyroid.',
+    care: 'Heart diseases, ECG, 2D Echo, TMT and Trop T tests.',
     slots: [{ start: 17 * 60, end: 20 * 60 }] as Slot[],
     timings: ['5:00 PM to 8:00 PM'],
   },
@@ -203,10 +202,6 @@ export const FAQ_ITEMS = [
   {
     question: 'Can I get an ECG, 2D Echo or TMT test in Tanuku?',
     answer: 'Yes. ECG, 2D Echo, TMT (treadmill test) and Trop T tests are done at New Life Hospital, Tanuku, and you can consult cardiologist Dr. U. Venkatesh in the evening, from 5:00 PM to 8:00 PM, for heart diseases.',
-  },
-  {
-    question: 'Which doctor treats blood pressure and thyroid problems in Tanuku?',
-    answer: 'Blood pressure and thyroid consultations are available at New Life Hospital, Tanuku, with Dr. U. Venkatesh, M.D., D.M. (Cardiology), from 5:00 PM to 8:00 PM, Monday to Saturday.',
   },
   {
     question: 'What are the OPD timings of New Life Hospital, Tanuku?',
