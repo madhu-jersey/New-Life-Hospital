@@ -343,28 +343,6 @@ main, footer, .nav { transition: opacity .18s ease; }
 .booking-form .button { width: 100%; }
 .booking-privacy { display: flex; gap: 8px; align-items: flex-start; color: var(--muted); font-size: 13px; }
 .booking-privacy svg { width: 16px; height: 16px; flex: 0 0 auto; margin-top: 2px; }
-.booking-privacy a { color: var(--leaf); font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
-.footer-privacy { color: rgba(233, 240, 234, .8); text-decoration: underline; text-underline-offset: 3px; }
-.footer-privacy:hover { color: var(--marigold); }
-
-/* ---------- Privacy policy page ---------- */
-.policy-page { min-height: 100vh; display: flex; flex-direction: column; background: var(--paper); }
-.policy-bar { border-bottom: 1px solid var(--line); background: var(--surface); }
-.policy-bar-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 72px; }
-.policy { flex: 1; max-width: 760px; padding-block: 40px 72px; }
-.policy-back { display: inline-flex; align-items: center; gap: 8px; padding-block: 8px; color: var(--leaf); font-size: 15px; font-weight: 600; }
-.policy-back-icon { width: 16px; height: 16px; transform: rotate(180deg); }
-.policy h1 { margin-top: 20px; font-size: clamp(34px, 5vw, 48px); font-weight: 600; line-height: 1.1; letter-spacing: -.02em; }
-.policy-updated { margin-top: 10px; color: var(--muted); font-size: 14px; }
-.policy-intro { margin-top: 24px; font-size: 18px; line-height: 1.6; }
-.policy section { margin-top: 36px; }
-.policy h2 { font-size: 22px; font-weight: 600; letter-spacing: -.01em; }
-.policy section p { margin-top: 10px; color: var(--ink); font-size: 16px; line-height: 1.7; }
-.policy-contact { padding: 20px 22px; border-radius: var(--radius-md); background: var(--leaf-tint); }
-.policy-contact h2 { font-size: 18px; }
-.policy-contact a { color: var(--leaf-deep); font-weight: 600; }
-.policy-foot { padding-block: 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
-.lang-te .policy h1, .lang-te .policy h2 { font-family: var(--telugu-display); letter-spacing: 0; line-height: 1.35; }
 .booking-success { display: grid; justify-items: start; gap: 12px; padding: 12px 0; animation: fadeIn .6s var(--ease) both; }
 .booking-success svg { width: 44px; height: 44px; color: var(--leaf); }
 .booking-success h3 { font-family: var(--serif); font-weight: 600; font-size: 26px; }

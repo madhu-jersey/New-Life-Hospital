@@ -178,7 +178,6 @@ const en = {
     notePlaceholder: 'e.g. pregnancy check-up, ECG',
     submit: 'Send request on WhatsApp',
     privacy: 'Your details go only into the WhatsApp message you send. This website does not store them.',
-    privacyLink: 'Privacy policy',
     orCall: 'Or call',
     errors: {
       name: 'Enter the patient’s name.',
@@ -269,7 +268,6 @@ const en = {
     location: 'Tanuku – 534211, Andhra Pradesh, India.',
     explore: 'Explore',
     connect: 'Contact',
-    privacy: 'Privacy policy',
     copyright: `© ${new Date().getFullYear()} ${HOSPITAL_INFO.name}, ${HOSPITAL_INFO.nearbyCity}`,
     nav: 'Footer navigation',
   },
@@ -435,7 +433,6 @@ const te: Dictionary = {
     notePlaceholder: 'ఉదా. గర్భిణీ పరీక్ష, ఈసీజీ',
     submit: 'వాట్సాప్‌లో అభ్యర్థన పంపండి',
     privacy: 'మీ వివరాలు మీరు పంపే వాట్సాప్ సందేశంలో మాత్రమే ఉంటాయి. ఈ వెబ్‌సైట్ వాటిని నిల్వ చేయదు.',
-    privacyLink: 'గోప్యతా విధానం',
     orCall: 'లేదా కాల్ చేయండి',
     errors: {
       name: 'రోగి పేరు నమోదు చేయండి.',
@@ -536,7 +533,6 @@ const te: Dictionary = {
     location: 'తణుకు – 534211, ఆంధ్రప్రదేశ్, భారతదేశం.',
     explore: 'త్వరిత లింకులు',
     connect: 'సంప్రదించండి',
-    privacy: 'గోప్యతా విధానం',
     copyright: `© ${new Date().getFullYear()} ${TELUGU_NAME}, తణుకు`,
     nav: 'ఫుటర్ మెనూ',
   },

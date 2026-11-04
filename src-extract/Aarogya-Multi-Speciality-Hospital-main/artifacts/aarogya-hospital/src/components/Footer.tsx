@@ -36,7 +36,6 @@ export function Footer() {
           </div>
         </div>
         <div className="footer-bottom">
-          <a className="footer-privacy" href="/privacy">{t.footer.privacy}</a>
           <p>{t.footer.copyright}</p>
         </div>
       </div>

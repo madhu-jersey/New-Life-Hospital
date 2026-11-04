@@ -217,7 +217,7 @@ export function Booking() {
               <button className="button button-whatsapp field-wide" type="submit">
                 <MessageCircle className="icon" aria-hidden="true" /><span>{t.booking.submit}</span>
               </button>
-              <p className="booking-privacy field-wide"><ShieldCheck aria-hidden="true" /><span>{t.booking.privacy} <a href="/privacy">{t.booking.privacyLink}</a></span></p>
+              <p className="booking-privacy field-wide"><ShieldCheck aria-hidden="true" />{t.booking.privacy}</p>
             </form>
           )}
         </div>

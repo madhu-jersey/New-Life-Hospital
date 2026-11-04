@@ -47,7 +47,7 @@ function crawlFilesPlugin() {
       server.middlewares.use(async (request, response, next) => {
         const pathname = new URL(request.url ?? '/', 'http://localhost').pathname;
         if (pathname !== '/robots.txt' && pathname !== '/sitemap.xml') {
-          if (pathname === '/' || pathname === '/privacy' || pathname.includes('.') || pathname.startsWith('/@') || pathname.startsWith('/src/')) return next();
+          if (pathname === '/' || pathname.includes('.') || pathname.startsWith('/@') || pathname.startsWith('/src/')) return next();
           const sourceHtml = await readFile(path.resolve(import.meta.dirname, 'index.html'), 'utf8');
           const notFoundHtml = await server.transformIndexHtml(pathname, sourceHtml);
           response.statusCode = 404;

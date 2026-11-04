@@ -4,7 +4,6 @@ import { ErrorBoundary } from '@/components/error-boundary';
 import { Toaster } from '@/components/ui/toaster';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import NotFound from '@/pages/not-found';
-import PrivacyPage from '@/pages/privacy';
 import { Route, Switch, useLocation, Router as WouterRouter } from 'wouter';
 import { Hero } from './components/Hero';
 import { Header, MobileDock } from './components/common';
@@ -114,7 +113,6 @@ function App() {
                   <MobileDock />
                 </>
               </Route>
-              <Route path="/privacy" component={PrivacyPage} />
               <Route component={NotFound} />
             </Switch>
           </RoutedErrorBoundary>
