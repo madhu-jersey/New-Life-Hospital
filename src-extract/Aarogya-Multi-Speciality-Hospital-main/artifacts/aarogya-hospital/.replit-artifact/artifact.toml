@@ -1,0 +1,24 @@
+kind = "web"
+previewPath = "/"
+title = "Aarogya Hospital Website"
+description = "A responsive public website for Aarogya Multi Speciality Hospital in Sajjapuram, with specialist information, reviews, clinic hours, emergency contacts, and directions."
+version = "1.0.0"
+id = "artifacts/aarogya-hospital"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 22970
+
+[services.development]
+run = "pnpm --filter @workspace/aarogya-hospital run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/aarogya-hospital", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/aarogya-hospital/dist/public"
+
+[services.env]
+PORT = "22970"
+BASE_PATH = "/"

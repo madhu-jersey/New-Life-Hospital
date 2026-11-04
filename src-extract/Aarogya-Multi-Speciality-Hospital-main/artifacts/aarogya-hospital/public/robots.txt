@@ -1,0 +1,5 @@
+# New Life Hospital, Tanuku
+User-agent: *
+Allow: /
+
+Sitemap: https://YOUR-DOMAIN/sitemap.xml

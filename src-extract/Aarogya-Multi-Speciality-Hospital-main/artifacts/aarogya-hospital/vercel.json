@@ -1,0 +1,5 @@
+{
+  "installCommand": "cd ../.. && pnpm install --frozen-lockfile",
+  "buildCommand": "cd ../.. && pnpm --filter \"./artifacts/aarogya-hospital\" run build",
+  "outputDirectory": "dist/public"
+}

@@ -1,0 +1,25 @@
+# dependencies
+node_modules/
+
+# build output
+dist/
+tmp/
+out-tsc/
+*.tsbuildinfo
+
+# env / secrets
+.env
+.env.*
+!.env.example
+
+# source archive (already extracted)
+*.zip
+
+# Replit / editor caches
+.cache/
+.local/
+.vercel/
+
+# System files
+.DS_Store
+Thumbs.db

@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "src/index.css"
+        ],
+        "createdAt": "2026-11-04T08:57:20.931Z",
+        "reason": "Claude: line 193 is .doctor-mark::after, a full-width 4px bottom rule under the doctor card header band (left:0;right:0;bottom:0), not a one-side card border"
+      }
+    ]
+  }
+}
