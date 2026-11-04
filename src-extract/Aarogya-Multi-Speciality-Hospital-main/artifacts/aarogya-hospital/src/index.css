@@ -39,8 +39,7 @@
 /* ---------- Base ---------- */
 *, *::before, *::after { box-sizing: border-box; }
 html { overflow-x: clip; scroll-padding-top: var(--header-h); }
-html:not(.has-smooth-scroll) { scroll-behavior: smooth; }
-html.has-smooth-scroll { scroll-behavior: auto; }
+html { scroll-behavior: smooth; }
 html.is-scroll-locked { overflow: hidden; }
 body { margin: 0; min-width: 320px; background: var(--paper); color: var(--ink); font-size: 17px; line-height: 1.6; }
 body, button, input, select, textarea { font-family: var(--sans); }

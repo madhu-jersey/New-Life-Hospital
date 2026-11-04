@@ -11,7 +11,7 @@ import { About, Doctors, FAQ, Facilities, HospitalGallery, Reviews, Visit, WhyCh
 import { Footer } from './components/Footer';
 import { Booking } from './components/Booking';
 import { updateSearchMetadata } from './lib/seo';
-import { scrollToHash, startSmoothScroll } from './lib/smooth-scroll';
+import { scrollToHash } from './lib/smooth-scroll';
 import { LanguageProvider } from './lib/i18n';
 import { HAS_GALLERY, HAS_REVIEWS } from './lib/sections';
 import './index.css';
@@ -32,9 +32,8 @@ function SearchHead() {
 }
 
 function App() {
-  // Smooth wheel scrolling, and in-page links that glide to their section instead of jumping.
+  // In-page links glide to their section instead of jumping.
   useEffect(() => {
-    const stop = startSmoothScroll();
     const onClick = (event: MouseEvent) => {
       if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey) return;
       const link = (event.target as Element | null)?.closest?.('a[href^="#"]');
@@ -44,7 +43,7 @@ function App() {
       scrollToHash(hash);
     };
     document.addEventListener('click', onClick);
-    return () => { stop(); document.removeEventListener('click', onClick); };
+    return () => document.removeEventListener('click', onClick);
   }, []);
 
   useLayoutEffect(() => {
