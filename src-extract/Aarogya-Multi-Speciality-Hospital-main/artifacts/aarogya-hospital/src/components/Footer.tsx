@@ -1,8 +1,6 @@
 import { ALT_PHONE, ALT_TEL, EMAIL, InstagramLink, LANDLINE, LANDLINE_TEL, Logo, MAILTO, ALL_LINK_IDS, PHONE, TEL, useSectionBase } from './common';
 import { HOSPITAL_INFO } from '@/lib/hospital';
 import { useLanguage } from '@/lib/i18n';
-import { SERVICE_PAGES } from '@/lib/service-pages';
-
 export function Footer() {
   const { t } = useLanguage();
   const labels = t.nav as Record<string, string>;
@@ -27,14 +25,7 @@ export function Footer() {
             <nav className="footer-nav" aria-label={t.footer.nav}>
               {ALL_LINK_IDS.map((id) => <a key={id} href={`${base}#${id}`}>{labels[id]}</a>)}
             </nav>
-          </div>
-          <div>
-            <h3>{t.footer.servicesInTanuku}</h3>
-            <nav className="footer-nav" aria-label={t.footer.servicesInTanuku}>
-              {SERVICE_PAGES.map((page) => <a key={page.slug} href={`/${page.slug}`}>{page.h1}</a>)}
-            </nav>
-          </div>
-          <div className="footer-contact">
+          </div>          <div className="footer-contact">
             <h3>{t.footer.connect}</h3>
             <a href={TEL}>{PHONE}</a>
             <a href={ALT_TEL}>{ALT_PHONE}</a>

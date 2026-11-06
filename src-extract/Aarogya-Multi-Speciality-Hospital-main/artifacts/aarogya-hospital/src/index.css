@@ -478,7 +478,7 @@ main, footer, .nav { transition: opacity .18s ease; }
 /* ---------- Footer ---------- */
 .footer { position: relative; padding: 72px 0 32px; background: var(--leaf-deep); color: rgba(233, 240, 234, .8); overflow: hidden; }
 .footer-telugu { color: var(--marigold); font-size: clamp(48px, 9vw, 128px); line-height: 1.15; margin-bottom: 40px; white-space: nowrap; }
-.footer-grid { display: grid; grid-template-columns: 1.3fr .7fr 1.1fr 1fr; gap: 40px; padding-top: 40px; border-top: 1px solid rgba(255, 255, 255, .14); }
+.footer-grid { display: grid; grid-template-columns: 1.4fr .8fr 1fr; gap: 48px; padding-top: 40px; border-top: 1px solid rgba(255, 255, 255, .14); }
 .footer-brand { display: flex; gap: 14px; align-items: center; margin-bottom: 18px; }
 .footer-logo { width: 56px; height: 56px; padding: 6px; border-radius: 14px; background: #fff; }
 .footer-name { font-family: var(--serif); font-weight: 700; font-size: 19px; color: #fff; }
