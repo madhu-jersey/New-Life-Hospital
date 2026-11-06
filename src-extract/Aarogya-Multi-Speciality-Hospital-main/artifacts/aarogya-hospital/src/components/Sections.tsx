@@ -1,5 +1,5 @@
 import { type CSSProperties, useCallback, useEffect, useRef, useState } from 'react';
-import { Activity, Baby, Clock3, Flower2, FlaskConical, Footprints, HandHeart, HeartHandshake, HeartPulse, Plus, TestTube, Waves, ShieldCheck, BadgeCheck, Rotate3d, Sprout, SquarePen, Stethoscope, UserRound } from 'lucide-react';
+import { Activity, Baby, Clock3, Flower2, FlaskConical, Footprints, HandHeart, HeartHandshake, HeartPulse, Plus, TestTube, Waves, ShieldCheck, BadgeCheck, ChevronDown, Rotate3d, Sprout, SquarePen, Stethoscope, UserRound } from 'lucide-react';
 import { ALT_PHONE, ALT_TEL, DIRECTIONS, EMAIL, Icon, LANDLINE, LANDLINE_TEL, MAILTO, PHONE, TEL } from './common';
 import { DOCTORS, HOSPITAL_INFO, HOSPITAL_MAP_EMBED, HOSPITAL_TOURS, type TourKey } from '@/lib/hospital';
 import { useLanguage } from '@/lib/i18n';
@@ -187,9 +187,23 @@ export function WhyChooseUs() {
   );
 }
 
+// Full empanelment list, shown behind "View all". Names stay in English in both languages.
+const ALL_INSURERS = [
+  'Aditya Birla Health Insurance (ABHI)', 'Acko General Insurance', 'Bajaj Allianz General Insurance', 'Care Health Insurance',
+  'Chola MS General Insurance', 'Generali Central Insurance', 'Go Digit General Insurance', 'HDFC ERGO General Insurance',
+  'ICICI Lombard', 'IFFCO Tokio General Insurance', 'IndusInd General Insurance (formerly Reliance General)', 'Liberty General Insurance',
+  'Manipal Cigna Health Insurance', 'Navi General Insurance', 'Niva Bupa Health Insurance', 'Royal Sundaram General Insurance',
+  'SBI General Insurance', 'Star Health Insurance', 'Tata AIG General Insurance', 'Universal Sompo General Insurance',
+];
+const ALL_TPAS = [
+  'Medi Assist', 'MD India', 'Heritage Health', 'FHPL (Family Health Plan)', 'Medsave', 'Health India', 'GHPL',
+  'Safeway (Health Assist)', 'Health Insurance TPA of India', 'Ericson', 'Volo Health (EWA)', 'Paramount', 'Vidal Health', 'Raksha',
+];
+
 // Insurers are shown as plain names, without logos.
 export function Insurance() {
   const { t } = useLanguage();
+  const [showAll, setShowAll] = useState(false);
   return (
     <section className="section insurance" id="insurance">
       <div className="container">
@@ -205,6 +219,20 @@ export function Insurance() {
           {t.insurance.partners.map((partner) => <li className="insurance-partner reveal" key={partner}>{partner}</li>)}
         </ul>
         <p className="insurance-tpa reveal"><strong>{t.insurance.tpaLabel}</strong>{t.insurance.tpa}</p>
+        <button type="button" className="button button-ghost insurance-toggle reveal" aria-expanded={showAll} aria-controls="insurance-all" onClick={() => setShowAll((open) => !open)}>
+          <span>{showAll ? t.insurance.hideAll : t.insurance.viewAll}</span>
+          <ChevronDown aria-hidden="true" />
+        </button>
+        <div className="insurance-all" id="insurance-all" hidden={!showAll}>
+          <div>
+            <h3 className="insurance-label">{t.insurance.allInsurersLabel} ({ALL_INSURERS.length})</h3>
+            <ol className="insurance-all-list" lang="en">{ALL_INSURERS.map((name) => <li key={name}>{name}</li>)}</ol>
+          </div>
+          <div>
+            <h3 className="insurance-label">{t.insurance.allTpasLabel} ({ALL_TPAS.length})</h3>
+            <ol className="insurance-all-list" lang="en">{ALL_TPAS.map((name) => <li key={name}>{name}</li>)}</ol>
+          </div>
+        </div>
         <p className="insurance-note reveal">{t.insurance.note}</p>
       </div>
     </section>

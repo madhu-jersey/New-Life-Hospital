@@ -260,6 +260,20 @@ main, footer, .nav { transition: opacity .18s ease; }
 .insurance-partner { display: grid; place-items: center; min-height: 76px; padding: 14px 16px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--surface); color: var(--ink); font-size: 16px; font-weight: 600; line-height: 1.3; text-align: center; }
 .insurance-tpa { margin-top: 28px; max-width: 70ch; font-size: 16px; line-height: 1.6; }
 .insurance-tpa strong { margin-right: 10px; padding: 2px 9px; border-radius: 6px; background: var(--marigold-tint); color: #8A5A10; font-size: 13px; font-weight: 700; letter-spacing: .04em; }
+.insurance-toggle { margin-top: 24px; gap: 8px; }
+.insurance-toggle svg { width: 18px; height: 18px; transition: rotate .35s var(--ease); }
+.insurance-toggle[aria-expanded="true"] svg { rotate: 180deg; }
+.insurance-all { display: grid; grid-template-columns: 3fr 2fr; gap: 32px; margin-top: 24px; padding: 28px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--surface); }
+.insurance-all[hidden] { display: none; }
+.insurance-all-list { margin: 0; padding-left: 1.6em; columns: 2; column-gap: 28px; font-size: 15.5px; line-height: 1.45; }
+.insurance-all > div:last-child .insurance-all-list { columns: 1; }
+.insurance-all-list li { break-inside: avoid; padding: 4px 0; }
+.insurance-all-list li::marker { color: var(--muted); font-size: .9em; }
+@media (max-width: 767px) {
+  .insurance-all { grid-template-columns: 1fr; gap: 24px; padding: 20px 16px; }
+  .insurance-all-list { columns: 1; }
+  .insurance-toggle { width: 100%; justify-content: center; }
+}
 .insurance-note { margin-top: 10px; color: var(--muted); font-size: 14px; }
 
 /* ---------- Facilities: two department panels ---------- */
