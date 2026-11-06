@@ -34,8 +34,8 @@ export function Doctors() {
             return (
               <article className={`doctor doctor--${doctor.accent}${photo ? ' has-photo' : ''} reveal`} key={doctor.initials}>
                 {photo ? (
-                  <div className="doctor-portrait">
-                    <img src={doctorPhotoSized(doctor.photoKey, 640)} srcSet={`${doctorPhotoSized(doctor.photoKey, 640)} 640w, ${photo} 1305w`} sizes="(max-width: 767px) 100vw, 540px" alt={`${text.name}, ${text.department}, ${HOSPITAL_INFO.name}`} loading="lazy" decoding="async" />
+                  <div className={`doctor-portrait doctor-portrait--${doctor.photoKey}`}>
+                    <img src={doctorPhotoSized(doctor.photoKey, 640)} srcSet={`${doctorPhotoSized(doctor.photoKey, 640)} 640w, ${photo} 1254w`} sizes="(max-width: 767px) 100vw, 540px" alt={`${text.name}, ${text.department}, ${HOSPITAL_INFO.name}`} loading="lazy" decoding="async" />
                     <AccentIcon className="doctor-portrait-badge" aria-hidden="true" />
                   </div>
                 ) : (
