@@ -1,7 +1,7 @@
 // Facts below come from the New Life Hospital brochure and the details the hospital supplied.
 // Empty strings mean "not provided yet": the matching link, button, or section is hidden until it is filled in.
 export const HOSPITAL_INFO = {
-  // Temporary domain. When the purchased domain is connected, set it here and set noindex to false;
+  // Temporary domain. When the purchased domain is connected, set it here and redirect the vercel.app address to it;
   // canonical, robots.txt, sitemap, and structured data all follow these two values.
   siteDomain: 'new-life-hospital-tanuku.vercel.app',
   facebookUrl: '',
@@ -11,8 +11,8 @@ export const HOSPITAL_INFO = {
   googleMapsUrl: 'https://www.google.com/maps/place/Newlife+hospital/@16.7578483,81.6808267,1050m/data=!3m1!1e3!4m14!1m7!3m6!1s0x3a37b7faedb6ac81:0x37b5a379caa9dce7!2sLIFE+HOSPITALS!8m2!3d16.7578432!4d81.6834016!16s%2Fg%2F11g9q8vgpy!3m5!1s0x3a37b76158b982f7:0x8282ab3c3935a0c9!8m2!3d16.7566922!4d81.6826178!16s%2Fg%2F11xg57sdl5?entry=ttu&g_ep=EgoyMDI2MTEwMi4wIKXMDSoASAFQAw%3D%3D',
   // The same listing opened on its Reviews tab: used for "Read more on Google" and "Write a review".
   googleReviewsUrl: 'https://www.google.com/maps/place/Newlife+hospital/@16.7578483,81.6808267,1050m/data=!3m1!1e3!4m16!1m7!3m6!1s0x3a37b7faedb6ac81:0x37b5a379caa9dce7!2sLIFE+HOSPITALS!8m2!3d16.7578432!4d81.6834016!16s%2Fg%2F11g9q8vgpy!3m7!1s0x3a37b76158b982f7:0x8282ab3c3935a0c9!8m2!3d16.7566922!4d81.6826178!9m1!1b1!16s%2Fg%2F11xg57sdl5?entry=ttu&g_ep=EgoyMDI2MTEwMi4wIKXMDSoASAFQAw%3D%3D',
-  // Hidden from search engines until the details are confirmed and the domain is live.
-  noindex: true,
+  // true hides the whole site from search engines. Open to Google since 2026-11-06.
+  noindex: false,
   name: 'New Life Hospital',
   shortName: 'New Life',
   foundingYear: null as number | null,

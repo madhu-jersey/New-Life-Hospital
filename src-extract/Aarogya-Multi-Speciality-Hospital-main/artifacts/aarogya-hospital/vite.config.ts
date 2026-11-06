@@ -2,9 +2,10 @@ import path from 'path';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'vite';
-import { copyFile, readFile } from 'node:fs/promises';
+import { copyFile, readFile, writeFile } from 'node:fs/promises';
 import { HOSPITAL_INFO, SEO_KEYWORDS } from './src/lib/hospital';
 import { buildStructuredData } from './src/lib/seo';
+import { SERVICE_PAGES, findServicePage, renderServiceDocument } from './src/lib/service-pages';
 
 import runtimeErrorOverlay from '@replit/vite-plugin-runtime-error-modal';
 
@@ -22,7 +23,10 @@ const escapeAttribute = (value: string) => value.replaceAll('&', '&amp;').replac
 
 function crawlFilesPlugin() {
   const buildDate = new Date().toISOString().slice(0, 10);
+  // One sitemap entry per service page, after the home page.
+  const serviceUrls = SERVICE_PAGES.map((page) => `  <url>\n    <loc>https://YOUR-DOMAIN/${page.slug}</loc>\n    <lastmod>BUILD-DATE</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.9</priority>\n  </url>\n`).join('');
   const replaceDomain = (content: string) => content
+    .replace('</urlset>', `${serviceUrls}</urlset>`)
     .replaceAll('YOUR-DOMAIN', domain)
     .replaceAll('BUILD-DATE', buildDate)
     .replace('Allow: /', HOSPITAL_INFO.noindex ? 'Disallow: /' : 'Allow: /');
@@ -49,10 +53,11 @@ function crawlFilesPlugin() {
         if (pathname !== '/robots.txt' && pathname !== '/sitemap.xml') {
           if (pathname === '/' || pathname.includes('.') || pathname.startsWith('/@') || pathname.startsWith('/src/')) return next();
           const sourceHtml = await readFile(path.resolve(import.meta.dirname, 'index.html'), 'utf8');
-          const notFoundHtml = await server.transformIndexHtml(pathname, sourceHtml);
-          response.statusCode = 404;
+          const pageHtml = await server.transformIndexHtml(pathname, sourceHtml);
+          const servicePage = findServicePage(pathname);
+          response.statusCode = servicePage ? 200 : 404;
           response.setHeader('Content-Type', 'text/html; charset=utf-8');
-          response.end(notFoundHtml);
+          response.end(servicePage ? renderServiceDocument(pageHtml, servicePage, `https://${domain}`) : pageHtml);
           return;
         }
         try {
@@ -78,6 +83,12 @@ function crawlFilesPlugin() {
     async closeBundle() {
       const outputDir = path.resolve(import.meta.dirname, 'dist/public');
       await copyFile(path.join(outputDir, 'index.html'), path.join(outputDir, '404.html'));
+      // Each service page as its own ready-made file (served at /<slug> by cleanUrls in vercel.json).
+      const builtHtml = await readFile(path.join(outputDir, 'index.html'), 'utf8');
+      await Promise.all(SERVICE_PAGES.map((page) => writeFile(
+        path.join(outputDir, `${page.slug}.html`),
+        renderServiceDocument(builtHtml, page, `https://${domain}`),
+      )));
     },
   };
 }

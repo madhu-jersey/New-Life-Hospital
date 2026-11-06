@@ -7,6 +7,7 @@ import { GALLERY_PHOTOS, type GalleryPhoto, REVIEW_DATA } from '@/lib/sections';
 import { lockScroll } from '@/lib/smooth-scroll';
 import { doctorPhoto, doctorPhotoSized } from '@/lib/doctor-photos';
 import { useLiveReviews } from '@/lib/live-reviews';
+import { SERVICE_PAGES } from '@/lib/service-pages';
 
 export function SectionHead({ title, subline, tone = '' }: { title: string; subline?: string; tone?: string }) {
   return (
@@ -114,6 +115,11 @@ export function Facilities() {
                     );
                   })}
                 </ul>
+                <nav className="care-pages" aria-label={group.title}>
+                  {SERVICE_PAGES.filter((page) => page.accent === group.key).map((page) => (
+                    <a key={page.slug} href={`/${page.slug}`}>{page.h1}<Icon name="arrow" /></a>
+                  ))}
+                </nav>
               </article>
             );
           })}

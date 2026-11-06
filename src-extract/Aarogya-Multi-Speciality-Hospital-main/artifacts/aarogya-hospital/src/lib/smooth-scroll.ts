@@ -7,13 +7,14 @@ export function lockScroll(locked: boolean) {
 }
 
 // In-page links glide to their section and leave the header clear of the heading.
-export function scrollToHash(hash: string) {
+// `instant` is for landing on a page with a #section already in the address.
+export function scrollToHash(hash: string, instant = false) {
   const target = hash === '#home' ? document.body : document.querySelector<HTMLElement>(hash);
   if (!target) return;
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const reduce = instant || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   // A link inside the open mobile menu fires while scrolling is still locked.
   lockScroll(false);
   const top = hash === '#home' ? 0 : target.getBoundingClientRect().top + window.scrollY + HEADER_OFFSET();
-  window.scrollTo({ top, behavior: reduce ? 'auto' : 'smooth' });
+  window.scrollTo({ top, behavior: reduce ? 'instant' : 'smooth' });
   history.replaceState(null, '', hash === '#home' ? window.location.pathname + window.location.search : hash);
 }

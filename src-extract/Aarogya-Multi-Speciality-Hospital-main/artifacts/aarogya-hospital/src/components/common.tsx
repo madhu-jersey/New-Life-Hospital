@@ -1,4 +1,5 @@
 import { type CSSProperties, type ReactNode, useEffect, useState } from 'react';
+import { useLocation } from 'wouter';
 import { ArrowDown, ArrowRight, ArrowUpRight, Check, Clock3, HeartPulse, Instagram, Mail, MapPin, MessageCircle, Phone } from 'lucide-react';
 import {
   BOOKING_WHATSAPP, GOOGLE_REVIEWS, HOSPITAL_ADDRESS_DISPLAY, HOSPITAL_ALT_TEL, HOSPITAL_DIRECTIONS, HOSPITAL_INFO,
@@ -63,8 +64,15 @@ export const ALL_LINK_IDS = ALL_NAV_IDS.filter((id) => (id !== 'gallery' || HAS_
 // The desktop header keeps to the main sections so it never wraps.
 export const NAV_IDS = ALL_LINK_IDS.filter((id) => id !== 'gallery' && id !== 'reviews');
 
+// Section links are "#doctors" on the home page and "/#doctors" from a service page.
+export function useSectionBase() {
+  const [location] = useLocation();
+  return location === '/' ? '' : '/';
+}
+
 export function Header() {
   const { t } = useLanguage();
+  const base = useSectionBase();
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -113,7 +121,7 @@ export function Header() {
   return (
     <header className={`header${scrolled ? ' is-scrolled' : ''}${hidden && !menuOpen ? ' is-hidden' : ''}${menuOpen ? ' is-menu-open' : ''}`}>
       <div className="container header-inner">
-        <a className="brand" href="#home" aria-label={t.header.homeAria}>
+        <a className="brand" href={`${base}#home`} aria-label={t.header.homeAria}>
           <Logo className="brand-logo" />
           <span className="brand-copy">
             <span className="brand-name">{HOSPITAL}</span>
@@ -121,7 +129,7 @@ export function Header() {
           </span>
         </a>
         <nav className="nav" aria-label={t.header.mainNav}>
-          {NAV_IDS.map((id) => <a key={id} className={active === id ? 'is-active' : ''} href={`#${id}`}>{labels[id]}</a>)}
+          {NAV_IDS.map((id) => <a key={id} className={active === id ? 'is-active' : ''} href={`${base}#${id}`}>{labels[id]}</a>)}
         </nav>
         <LanguageToggle className="header-lang" />
         <a className="button button-small header-call" href={TEL} aria-label={t.header.callAria(PHONE)}>
@@ -141,7 +149,7 @@ export function Header() {
       <div className={`mobile-menu${menuOpen ? ' is-open' : ''}`} id="mobile-menu" aria-hidden={!menuOpen}>
         <nav aria-label={t.header.mobileNav}>
           {ALL_LINK_IDS.map((id, index) => (
-            <a key={id} href={`#${id}`} tabIndex={menuOpen ? 0 : -1} style={{ '--i': index } as CSSProperties} onClick={() => setMenuOpen(false)}>{labels[id]}</a>
+            <a key={id} href={`${base}#${id}`} tabIndex={menuOpen ? 0 : -1} style={{ '--i': index } as CSSProperties} onClick={() => setMenuOpen(false)}>{labels[id]}</a>
           ))}
         </nav>
         <a className="button mobile-menu-call" href={TEL} tabIndex={menuOpen ? 0 : -1}><Icon name="phone" /><span>{t.header.call} {PHONE}</span></a>

@@ -8,6 +8,7 @@ import {
   MEDICAL_SERVICES,
   MEDICAL_SPECIALTIES,
 } from './hospital';
+import { findServicePage, serviceStructuredData, servicePageUrl } from './service-pages';
 
 // Pure (no DOM), so the build can bake the same JSON-LD into index.html for crawlers that skip JavaScript.
 // Only confirmed facts go here: no opening hours, map pin, or founding year until the hospital provides them.
@@ -136,38 +137,43 @@ function setLink(rel: string, href: string, hreflang?: string) {
 
 export function updateSearchMetadata(pathname: string, configuredSiteUrl?: string) {
   const origin = new URL(configuredSiteUrl || `https://${HOSPITAL_INFO.siteDomain}`).origin;
-  const pageUrl = new URL(pathname || '/', `${origin}/`).href;
   const isHome = pathname === '/' || pathname === '';
+  const servicePage = findServicePage(pathname);
+  const pageUrl = servicePage ? servicePageUrl(origin, servicePage) : new URL(pathname || '/', `${origin}/`).href;
   const isLocal = /^(localhost|127\.0\.0\.1)$/.test(window.location.hostname);
   const imageUrl = new URL(HOSPITAL_INFO.image || HOSPITAL_INFO.logo, `${origin}/`).href;
+  const title = servicePage?.title ?? HOSPITAL_INFO.title;
+  const description = servicePage?.description ?? HOSPITAL_INFO.description;
+  const indexable = isHome || Boolean(servicePage);
 
-  document.title = HOSPITAL_INFO.title;
-  setMeta('meta[name="description"]', 'name', 'description', HOSPITAL_INFO.description);
-  const robotsContent = HOSPITAL_INFO.noindex || isLocal ? 'noindex, nofollow' : isHome ? 'index, follow, max-image-preview:large, max-snippet:-1' : 'noindex, nofollow';
+  document.title = title;
+  setMeta('meta[name="description"]', 'name', 'description', description);
+  const robotsContent = HOSPITAL_INFO.noindex || isLocal || !indexable ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1';
   setMeta('meta[name="robots"]', 'name', 'robots', robotsContent);
   setMeta('meta[name="theme-color"]', 'name', 'theme-color', '#0F3A24');
-  setMeta('meta[property="og:title"]', 'property', 'og:title', HOSPITAL_INFO.title);
-  setMeta('meta[property="og:description"]', 'property', 'og:description', HOSPITAL_INFO.description);
+  setMeta('meta[property="og:title"]', 'property', 'og:title', title);
+  setMeta('meta[property="og:description"]', 'property', 'og:description', description);
   setMeta('meta[property="og:type"]', 'property', 'og:type', 'website');
   setMeta('meta[property="og:url"]', 'property', 'og:url', pageUrl);
   setMeta('meta[property="og:image"]', 'property', 'og:image', imageUrl);
   setMeta('meta[property="og:locale"]', 'property', 'og:locale', 'en_IN');
   setMeta('meta[name="twitter:card"]', 'name', 'twitter:card', 'summary_large_image');
-  setMeta('meta[name="twitter:title"]', 'name', 'twitter:title', HOSPITAL_INFO.title);
-  setMeta('meta[name="twitter:description"]', 'name', 'twitter:description', HOSPITAL_INFO.description);
+  setMeta('meta[name="twitter:title"]', 'name', 'twitter:title', title);
+  setMeta('meta[name="twitter:description"]', 'name', 'twitter:description', description);
   setMeta('meta[name="twitter:image"]', 'name', 'twitter:image', imageUrl);
   setLink('canonical', pageUrl);
   setLink('alternate', pageUrl, 'en-IN');
+  setLink('alternate', pageUrl, 'x-default');
 
   const existingSchema = document.getElementById('hospital-jsonld') as HTMLScriptElement | null;
-  if (!isHome) {
+  if (!indexable) {
     existingSchema?.remove();
     return;
   }
-  // The build already ships this JSON-LD in index.html; refresh it in place rather than duplicating it.
+  // The build already ships this JSON-LD in each page's HTML; refresh it in place rather than duplicating it.
   const script = existingSchema ?? document.createElement('script');
   script.id = 'hospital-jsonld';
   script.type = 'application/ld+json';
-  script.textContent = JSON.stringify(buildStructuredData(origin));
+  script.textContent = JSON.stringify(servicePage ? serviceStructuredData(origin, servicePage) : buildStructuredData(origin));
   if (!existingSchema) document.head.append(script);
 }

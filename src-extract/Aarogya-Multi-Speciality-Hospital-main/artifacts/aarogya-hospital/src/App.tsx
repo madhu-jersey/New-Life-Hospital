@@ -4,6 +4,8 @@ import { ErrorBoundary } from '@/components/error-boundary';
 import { Toaster } from '@/components/ui/toaster';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import NotFound from '@/pages/not-found';
+import ServicePage from '@/pages/service';
+import { findServicePage } from '@/lib/service-pages';
 import { Route, Switch, useLocation, Router as WouterRouter } from 'wouter';
 import { Hero } from './components/Hero';
 import { Header, MobileDock } from './components/common';
@@ -43,7 +45,13 @@ function App() {
       scrollToHash(hash);
     };
     document.addEventListener('click', onClick);
-    return () => document.removeEventListener('click', onClick);
+    // Arriving from a service page on "/#booking": the section exists only once React has drawn the page.
+    const hash = window.location.hash;
+    const timer = /^#[a-z]+$/.test(hash) ? window.setTimeout(() => scrollToHash(hash, true), 120) : 0;
+    return () => {
+      document.removeEventListener('click', onClick);
+      window.clearTimeout(timer);
+    };
   }, []);
 
   useLayoutEffect(() => {
@@ -112,6 +120,12 @@ function App() {
                   <Footer />
                   <MobileDock />
                 </>
+              </Route>
+              <Route path="/:slug">
+                {(params) => {
+                  const page = findServicePage(params.slug);
+                  return page ? <ServicePage page={page} /> : <NotFound />;
+                }}
               </Route>
               <Route component={NotFound} />
             </Switch>
