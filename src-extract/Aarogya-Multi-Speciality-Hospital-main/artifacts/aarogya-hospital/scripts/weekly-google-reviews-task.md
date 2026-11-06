@@ -31,9 +31,12 @@ The script prints one line:
 STEP 3: Check the site still builds. In the website project folder run: pnpm run build
 If the build fails, put the old numbers back by running the script again with the values you noted in step 2, report the build error, and stop without publishing.
 
-STEP 4: Publish, only if the site is linked to Vercel. Look for .vercel\project.json in the monorepo root, and if not there, in the website project folder.
-- If found, run from the folder that contains it: vercel deploy --prod --yes
-  Report the production URL it prints. Never use --force, never change Vercel project settings or environment variables, never create a new Vercel project.
-- If not found anywhere, do not publish. Report: "Updated the numbers in the code, but the site is not linked to Vercel yet, so nothing was published."
+STEP 4: Publish. The site is the Cloudflare Pages project "new-life-hospital", which publishes every push to main on GitHub.
+From C:\Users\madhu\OneDrive\Desktop\NEW-LIFE-HOSPITAL run:
+  git add src-extract/Aarogya-Multi-Speciality-Hospital-main/artifacts/aarogya-hospital/src/lib/hospital.ts
+  git commit -m "Update Google review count"
+  git push origin main
+Stage only that one file. Never use --force, and never change Cloudflare settings. If the push fails, report the error and stop.
+About two minutes later, open https://newlifehospitaltanuku.com and confirm the new count shows in the reviews section.
 
 FINAL REPORT (short): the date, the counts read from Google (total, rating, and the five star counts), whether the site changed, and whether it was published (with the URL) or why not.

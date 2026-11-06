@@ -1,10 +1,14 @@
 // GET /api/google-reviews — the hospital's live Google rating, review count and latest reviews.
 //
-// Runs as a Vercel Function and calls the Google Places API (New), so the API key never reaches the browser.
-// Vercel's CDN caches each answer for 6 hours: a new Google review shows on the site within a few hours,
-// and the Places API is called only a few times a day (well inside Google's free monthly allowance).
+// NOT LIVE. This was written as a Vercel Function, and the site now runs on Cloudflare Pages, which does not
+// run files in api/. So /api/google-reviews returns 404 and the reviews section shows the snapshot in
+// src/lib/hospital.ts. To switch live reviews on, port this to a Cloudflare Pages Function
+// (functions/api/google-reviews.ts at the Pages root directory, reading the key from the request context's env).
 //
-// Set in Vercel → Project → Settings → Environment Variables:
+// It calls the Google Places API (New) on the server, so the API key never reaches the browser, and caches
+// each answer for 6 hours, so the Places API is called only a few times a day.
+//
+// Settings it needs (as server-side environment variables):
 //   GOOGLE_PLACES_API_KEY  required. A Google Cloud key with "Places API (New)" enabled.
 //   GOOGLE_PLACE_ID        optional. The listing's place ID (starts with "ChIJ"). Without it the function finds
 //                          "Newlife hospital" near the map pin itself; copy the placeId from this endpoint's
@@ -42,7 +46,7 @@ function json(body: unknown, status: number, cacheSeconds: number) {
     status,
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
-      // Browsers re-check every 10 minutes; Vercel's CDN serves the cached copy and refreshes it in the background.
+      // Browsers re-check every 10 minutes; a shared cache serves the cached copy and refreshes it in the background.
       'Cache-Control': cacheSeconds > 0 ? `public, max-age=600, s-maxage=${cacheSeconds}, stale-while-revalidate=86400` : 'no-store',
     },
   });

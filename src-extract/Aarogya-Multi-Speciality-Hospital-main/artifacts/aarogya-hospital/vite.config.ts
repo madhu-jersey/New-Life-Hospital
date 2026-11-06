@@ -83,7 +83,7 @@ function crawlFilesPlugin() {
     async closeBundle() {
       const outputDir = path.resolve(import.meta.dirname, 'dist/public');
       await copyFile(path.join(outputDir, 'index.html'), path.join(outputDir, '404.html'));
-      // Each service page as its own ready-made file (served at /<slug> by cleanUrls in vercel.json).
+      // Each service page as its own ready-made file (Cloudflare Pages serves it at /<slug>).
       const builtHtml = await readFile(path.join(outputDir, 'index.html'), 'utf8');
       await Promise.all(SERVICE_PAGES.map((page) => writeFile(
         path.join(outputDir, `${page.slug}.html`),

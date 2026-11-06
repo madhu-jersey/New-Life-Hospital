@@ -2,7 +2,7 @@
 // Empty strings mean "not provided yet": the matching link, button, or section is hidden until it is filled in.
 export const HOSPITAL_INFO = {
   // The hospital's own domain. Canonical links, robots.txt, the sitemap and structured data all follow this value;
-  // vercel.json redirects www and the old vercel.app address here.
+  // a Cloudflare redirect rule sends www here.
   siteDomain: 'newlifehospitaltanuku.com',
   facebookUrl: '',
   instagramUrl: '',
