@@ -1,9 +1,9 @@
 // Facts below come from the New Life Hospital brochure and the details the hospital supplied.
 // Empty strings mean "not provided yet": the matching link, button, or section is hidden until it is filled in.
 export const HOSPITAL_INFO = {
-  // Temporary domain. When the purchased domain is connected, set it here and redirect the vercel.app address to it;
-  // canonical, robots.txt, sitemap, and structured data all follow these two values.
-  siteDomain: 'new-life-hospital-tanuku.vercel.app',
+  // The hospital's own domain. Canonical links, robots.txt, the sitemap and structured data all follow this value;
+  // vercel.json redirects www and the old vercel.app address here.
+  siteDomain: 'newlifehospitaltanuku.com',
   facebookUrl: '',
   instagramUrl: '',
   instagramHandle: '',

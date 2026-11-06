@@ -3,5 +3,19 @@
   "buildCommand": "cd ../.. && pnpm --filter \"./artifacts/aarogya-hospital\" run build",
   "outputDirectory": "dist/public",
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.newlifehospitaltanuku.com" }],
+      "destination": "https://newlifehospitaltanuku.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "new-life-hospital-tanuku.vercel.app" }],
+      "destination": "https://newlifehospitaltanuku.com/:path*",
+      "permanent": true
+    }
+  ]
 }
